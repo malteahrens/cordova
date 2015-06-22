@@ -13,11 +13,11 @@ before_install:
   - npm install -g ionic
 script:
 #- cd mapdis
-- cordova plugin add cordova-plugin-device
-- cordova plugin add cordova-plugin-vibration
-- cordova plugin add cordova-plugin-device-orientation
-- cordova plugin add cordova-plugin-network-information
-- cordova plugin add cordova-plugin-geolocation
+- grunt plugin:add:ordova-plugin-device
+- grunt plugin:add:cordova-plugin-vibration
+- grunt plugin:add:cordova-plugin-device-orientation
+- grunt plugin:add:ordova-plugin-network-information
+- grunt plugin:add:cordova-plugin-geolocation
 - cordova build
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
