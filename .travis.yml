@@ -1,43 +1,27 @@
 language: android
-
 branches:
   only:
   - master
-
 android:
   components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    - platform-tools
-
-    # The BuildTools version used by your project
-    - build-tools
-
-    # The SDK version used to compile your project
-    - android-22
-
-# install npm
+  - platform-tools
+  - build-tools
+  - android-22
 before_install:
-  - nvm install 0.10
-  - npm install phonegap -g
-
+- nvm install 0.10
+- npm install phonegap -g
 script:
-  #- phonegap create mapdis com.example.mapdis MapDis
-  - cd mapdis
-  #- phonegap platform add android
-  - phonegap plugin add cordova-plugin-device
-  - phonegap plugin add cordova-plugin-vibration
-  - phonegap plugin add cordova-plugin-device-orientation
-  - phonegap plugin add cordova-plugin-network-information
-  - phonegap plugin add cordova-plugin-geolocation
-  - phonegap build
-  - '/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release'
-  - cd ..
-
-  # copy apk to release folder
-  - sh ./deploy/scripts/github.sh
-
+- cd mapdis
+- phonegap plugin add cordova-plugin-device
+- phonegap plugin add cordova-plugin-vibration
+- phonegap plugin add cordova-plugin-device-orientation
+- phonegap plugin add cordova-plugin-network-information
+- phonegap plugin add cordova-plugin-geolocation
+- phonegap build
+- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
+- cd ..
+- sh ./deploy/scripts/github.sh
 env:
   global:
-    # this is for Travis to be able to push back to github
-    - secure: "P0SFVXYMJhNb3dX/Hx4rxjL/toViP0Vo0yXbMK/vwOsSrixkU84ltMGykBYTUztdAFJvsO0xrhKsdPbBmdjEF48emrmoymknxKYPIJ6NL1N6fy0EUoE6o7vBX+agthD/uhSNCJgXRK+giqxP5Htz3BkrU9VgdFdVrSqU9bsm4Bc="
+  - secure: P0SFVXYMJhNb3dX/Hx4rxjL/toViP0Vo0yXbMK/vwOsSrixkU84ltMGykBYTUztdAFJvsO0xrhKsdPbBmdjEF48emrmoymknxKYPIJ6NL1N6fy0EUoE6o7vBX+agthD/uhSNCJgXRK+giqxP5Htz3BkrU9VgdFdVrSqU9bsm4Bc=
+  - secure: BPoUZORXgvCGonL6U88Gpo40SAfQzIh8QYTEtqLZqYM/sG0jcm7ZKD16h1g91R++HxzKR3/kR8NmLXiQgzkmAvo1x0QiSGW8TyogqoKsr48z5ycp4mCq5bvHvWreB2/fBtmTNzJ/vQTpeKmCitNQ4r7aDKx7NBdUdsJq3nmVN2OEJPxeJ2WdqYatMijtLFwp9/HBs38Vtq7LRn90AX1o26W35Q6qbPvwrkXGSN6LVCAXnU1CDhj6k7K1nF9UoVLX3SM+1EOYHh76j8n/6TzkEzOACsmpbbNz6gQTZ/mQ4G/gCkzZodL7Ew7tF+8wCAFn9Z9+wN6N1BVqmkGmLwIoMYgc2gM39el/ord/P1qULAZUENLRsxIg2SExoWftUq5uyupVu9gKCGn80bYz5+t0CVG9B41/ew7rmMZ1E16Zx5aVZb6npfgtF6keDVGu7aunVrB41TBp9zJp04yjM3YOmo7ROYhger+hWh/8CebwrMe4+QNFaPUFFxq4M94EraEn57b5+EFfzFqEsKFPo3SGOb+wqBFLNo5HrZ528HI1jG5ndt7sC6mhI+AZqe5bfUS5vpCGtfMM6n7A7JO7AIXWaSy+AOcO54l8NXl7dq9K9O2oBAbZP++azUl+nYaizYu5Ic1EQi7ZUenhpq8sAz4Uf7mWW9w0E1IsPHPvBUlt+xQ=
