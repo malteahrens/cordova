@@ -15,7 +15,7 @@ before_install:
   - npm install -g grunt-cli
   - npm install
   - mkdir plugins
-  - mkdir platforms
+  - mkdir platforms 
 script:
 #- cd mapdis
 - grunt platform:add:android
