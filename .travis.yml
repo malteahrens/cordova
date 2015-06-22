@@ -8,8 +8,9 @@ android:
   - build-tools
   - android-22
 before_install:
-- nvm install 0.10
-- npm install phonegap -g
+  - nvm install 0.12
+  - npm install -g cordova
+  - npm install -g ionic
 script:
 - cd mapdis
 - phonegap plugin add cordova-plugin-device
