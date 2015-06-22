@@ -16,12 +16,7 @@ before_install:
   - npm install
 script:
 #- cd mapdis
-- grunt plugin:add:ordova-plugin-device
-- grunt plugin:add:cordova-plugin-vibration
-- grunt plugin:add:cordova-plugin-device-orientation
-- grunt plugin:add:ordova-plugin-network-information
-- grunt plugin:add:cordova-plugin-geolocation
-- grunt build:android --debug
+- grunt platform:add:android
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
 #- sh ./deploy/scripts/github.sh
