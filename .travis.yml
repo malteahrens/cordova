@@ -14,10 +14,9 @@ before_install:
   - npm install -g grunt
   - npm install -g grunt-cli
   - npm install
-  - ionic platform add android
 script:
 #- cd mapdis
-  - ionic build android
+  - grunt platform:add:android
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
 #- sh ./deploy/scripts/github.sh
