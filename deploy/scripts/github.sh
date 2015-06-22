@@ -6,12 +6,11 @@ git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
 #repository to deploy to. must be readable and writable.
-repo=https://malteahrens:${GH_TOKEN}@github.com/malteahrens/vita
+repo=https://malteahrens:${GH_TOKEN}@github.com/malteahrens/cordova
 
 # clear and re-create the out directory
 #rm -rf release || exit 0;
 #mkdir release;
-
 git remote set-url origin $repo
 git status
 git add release
