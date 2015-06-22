@@ -16,7 +16,7 @@ before_install:
   - npm install
 script:
 #- cd mapdis
-  - ionic platform add android
+  - ionic build android
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
 #- sh ./deploy/scripts/github.sh
