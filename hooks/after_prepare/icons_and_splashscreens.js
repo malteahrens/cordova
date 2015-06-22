@@ -20,7 +20,7 @@ var Orchestrator = require('orchestrator');
 
 var BASES = {
   android: 'res',
-  ios: 'MyIonicProject/Resources'
+  ios: 'Cordova/Resources'
 };
 var RESOURCE_DIR = 'resources';
 

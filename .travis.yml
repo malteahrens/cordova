@@ -12,16 +12,16 @@ before_install:
   - npm install -g cordova
   - npm install -g ionic
 script:
-- cd mapdis
+#- cd mapdis
 - cordova plugin add cordova-plugin-device
 - cordova plugin add cordova-plugin-vibration
 - cordova plugin add cordova-plugin-device-orientation
 - cordova plugin add cordova-plugin-network-information
 - cordova plugin add cordova-plugin-geolocation
 - cordova build
-- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
-- cd ..
-- sh ./deploy/scripts/github.sh
+#- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
+#- cd ..
+#- sh ./deploy/scripts/github.sh
 env:
   global:
   - secure: P0SFVXYMJhNb3dX/Hx4rxjL/toViP0Vo0yXbMK/vwOsSrixkU84ltMGykBYTUztdAFJvsO0xrhKsdPbBmdjEF48emrmoymknxKYPIJ6NL1N6fy0EUoE6o7vBX+agthD/uhSNCJgXRK+giqxP5Htz3BkrU9VgdFdVrSqU9bsm4Bc=
