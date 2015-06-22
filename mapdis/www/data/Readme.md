@@ -1,1 +1,0 @@
-UPDATE macvendor SET mac = substr( mac, 1,2 )||':'||substr( mac, 3,2 )||':'||substr( mac, 5,2 );
