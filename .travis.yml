@@ -13,12 +13,12 @@ before_install:
   - npm install -g ionic
 script:
 - cd mapdis
-- phonegap plugin add cordova-plugin-device
-- phonegap plugin add cordova-plugin-vibration
-- phonegap plugin add cordova-plugin-device-orientation
-- phonegap plugin add cordova-plugin-network-information
-- phonegap plugin add cordova-plugin-geolocation
-- phonegap build
+- cordova plugin add cordova-plugin-device
+- cordova plugin add cordova-plugin-vibration
+- cordova plugin add cordova-plugin-device-orientation
+- cordova plugin add cordova-plugin-network-information
+- cordova plugin add cordova-plugin-geolocation
+- cordova build
 - "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 - cd ..
 - sh ./deploy/scripts/github.sh
