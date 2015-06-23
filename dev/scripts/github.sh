@@ -14,7 +14,7 @@ repo=https://malteahrens:${GH_TOKEN}@github.com/malteahrens/cordova
 
 git remote set-url origin $repo
 git status
-git add dev
+git add dev/CordovaApp-debug.apk
 git commit -m "Android release for SDK 22 [ci skip]"
 git config --global push.default simple
 git push
