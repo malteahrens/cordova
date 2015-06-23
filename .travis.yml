@@ -21,7 +21,8 @@ script:
   - mkdir platforms
   - cordova -v
   - ionic platform add android
-  - grunt build:android:alpha –package
+  - grunt platform:add:android
+  - ls platforms
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
 #- sh ./deploy/scripts/github.sh
