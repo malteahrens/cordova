@@ -25,7 +25,7 @@ script:
   - grunt platform:add:android
   - grunt build
   - ls platforms/android/ant-build/
-  - "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk release/CordovaApp-debug.apk"
+  - "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
   - sh ./dev/scripts/github.sh
 
 env:
