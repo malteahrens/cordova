@@ -20,6 +20,7 @@ script:
   - touch www/empty
   - mkdir platforms
   - cordova -v
+  - cordova platform add android
   - cordova build android
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
