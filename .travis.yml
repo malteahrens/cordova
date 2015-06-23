@@ -22,6 +22,7 @@ script:
   - cordova -v
   - ionic platform add android
   - ionic build android
+  - ls platforms/android/
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
 #- sh ./deploy/scripts/github.sh
