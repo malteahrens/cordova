@@ -13,7 +13,9 @@ before_install:
   - npm install -g ionic
   - npm install -g grunt
   - npm install -g grunt-cli
+  - npm install -g bower
   - npm install
+  - bower install
 script:
 #- cd mapdis
   - mkdir www
