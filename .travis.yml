@@ -16,7 +16,10 @@ before_install:
   - npm install
 script:
 #- cd mapdis
-  - ionic platform add android
+  - mkdir www
+  - touch www/empty
+  - mkdir platforms
+  - cordova build android
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
 #- sh ./deploy/scripts/github.sh
