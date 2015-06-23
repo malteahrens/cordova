@@ -24,6 +24,7 @@ script:
   - cordova -v
   - grunt platform:add:android
   - grunt build
+  - ls platforms/android/ant-build/
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
 #- sh ./deploy/scripts/github.sh
