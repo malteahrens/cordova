@@ -2,6 +2,8 @@ language: android
 branches:
   only:
   - master
+deploy:
+  skip_cleanup: true
 android:
   components:
   - platform-tools
