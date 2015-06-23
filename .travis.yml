@@ -20,9 +20,8 @@ script:
   - touch www/empty
   - mkdir platforms
   - cordova -v
-  - ionic platform add android
   - grunt platform:add:android
-  - ls platforms/android/bin
+  - grunt build
 #- "/bin/cp -rf platforms/android/build/outputs/apk/*.apk ../release"
 #- cd ..
 #- sh ./deploy/scripts/github.sh
