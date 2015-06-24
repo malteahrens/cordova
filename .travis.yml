@@ -26,13 +26,14 @@ script:
   - cordova -v
   - ionic info
   - ionic browser list
-  - ionic browser add crosswalk
+  - ionic browser add crosswalk@12.41.296.5
   - ionic resources --splash
   - cordova plugin add cordova-plugin-geolocation
   - cordova plugin add com.pylonproducts.wifiwizard
   - grunt build
   - ls platforms/android/ant-build/
-  - "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
+  - "/bin/cp /home/travis/build/malteahrens/cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk"
+  #- "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
   - sh ./dev/scripts/github.sh
 
 env:
