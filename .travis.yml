@@ -25,8 +25,8 @@ script:
   - mkdir platforms
   - cordova -v
   - grunt platform:add:android
-  - grunt plugin:add:org.apache.cordova.geolocation
-  - grunt plugin:add:com.pylonproducts.wifiwizard
+  - cordova plugin add org.apache.cordova.geolocation
+  - cordova plugin add com.pylonproducts.wifiwizard
   - grunt build
   - ls platforms/android/ant-build/
   - "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
