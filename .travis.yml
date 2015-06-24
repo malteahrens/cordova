@@ -24,7 +24,7 @@ script:
   - touch www/empty
   - mkdir platforms
   - cordova -v
-  - ionic add crosswalk
+  - ionic browser add crosswalk
   - cordova plugin add cordova-plugin-geolocation
   - cordova plugin add com.pylonproducts.wifiwizard
   - grunt build
