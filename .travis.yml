@@ -26,7 +26,8 @@ script:
   - cordova -v
   - ionic info
   - ionic browser list
-  - ionic browser add crosswalk@12.41.296.5
+  # ionic browser add crosswalk@12.41.296.5 -> results in 65MB installed app
+  - ionic browser add crosswalk@10.39.236.1
   - ionic resources --splash
   - cordova plugin add cordova-plugin-geolocation
   - cordova plugin add com.pylonproducts.wifiwizard
