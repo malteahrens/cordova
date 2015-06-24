@@ -26,7 +26,7 @@ script:
   - ionic -v
   - cordova -v
   - grunt platform:add:android
-  - ionic plugin add cordova-plugin-crosswalk-webview
+  - ionic browser add crosswalk
   - cordova plugin add cordova-plugin-geolocation
   - cordova plugin add com.pylonproducts.wifiwizard
   - grunt build
