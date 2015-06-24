@@ -24,8 +24,8 @@ script:
   - touch www/empty
   - mkdir platforms
   - cordova -v
-  - cordova plugin add org.apache.cordova.geolocation
   - grunt platform:add:android
+  - grunt plugin:add:org.apache.cordova.geolocation
   - grunt build
   - ls platforms/android/ant-build/
   - "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
