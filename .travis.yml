@@ -23,6 +23,7 @@ script:
   - mkdir www
   - touch www/empty
   - mkdir platforms
+  - ionic -v
   - cordova -v
   - grunt platform:add:android
   - ionic browser add crosswalk
