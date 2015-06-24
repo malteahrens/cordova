@@ -25,9 +25,9 @@ script:
   - mkdir platforms
   - cordova -v
   - grunt platform:add:android
-  - ionic add crosswalk
+  - ionic browser add crosswalk
   - cordova plugin add cordova-plugin-geolocation
-  - cordova plugin add cordova-plugin-wifiwizard
+  - cordova plugin add wifiwizard
   - grunt build
   - ls platforms/android/ant-build/
   - "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
