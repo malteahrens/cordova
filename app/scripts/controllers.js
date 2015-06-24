@@ -3,10 +3,13 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         var map = new mapboxgl.Map({
-            container: 'map', // container id
-            style: 'https://www.mapbox.com/mapbox-gl-styles/styles/outdoors-v7.json', //stylesheet location
-            center: [40, -74.50], // starting position
-            zoom: 9 // starting zoom
+            container: 'map',
+            zoom: 12.5,
+            center: [48.14882451158226, 11.451873779296875],
+            style: 'https://www.mapbox.com/mapbox-gl-styles/styles/bright-v7.json',
+            minZoom: 9,
+            maxZoom: 20,
+            interactive: true
         });
     })
 
