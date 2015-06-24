@@ -7,3 +7,7 @@
 .scroll {
     height: 100%;
 }
+
+.scroll-content {
+   padding: 0 0 0 0;
+}
