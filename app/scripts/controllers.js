@@ -1,6 +1,10 @@
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {
+
+    })
+
+.controller('MapController', function($scope, $ionicLoading) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -11,7 +15,13 @@ angular.module('starter.controllers', [])
             maxZoom: 20,
             interactive: true
         });
-    })
+
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            alert(pos.coords.latitude);
+        });
+    });
+
+});
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
