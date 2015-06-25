@@ -48,3 +48,18 @@ angular.module('starter.services', [])
     }
   };
 });
+
+.factory('Geo', ['$q', function($q){
+    return {
+        getLocation: function(options){
+            var q = $q.defer();
+            navigator.geolocation.watchPosition(function (pos) {
+                //var latLng = new google.maps.LatLng(, pos.coords.longitude);
+                q.resolve("here");
+            }, function (error) {
+                q.reject(error)
+            }, options);
+            return q.promise;
+        }
+    }
+}])

@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $cordovaGeolocation) {
+.controller('DashCtrl', function($scope) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -17,33 +17,26 @@ angular.module('starter.controllers', [])
 //   This method accepts a `Position` object, which contains
 //   the current GPS coordinates
 //
-        var posOptions = {timeout: 10000, enableHighAccuracy: false};
-        $cordovaGeolocation
-            .getCurrentPosition(posOptions)
-            .then(function (position) {
-                var lat  = position.coords.latitude
-                var long = position.coords.longitude
-            }, function(err) {
-                // error
-            });
+        $ionicPlatform.ready(function() {
+            function onSuccess(position) {
+                var element = document.getElementById('geolocation');
+                element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
+                    'Longitude: ' + position.coords.longitude + '<br />' +
+                    '<hr />' + element.innerHTML;
+            }
 
+// onError Callback receives a PositionError object
+//
+            function onError(error) {
+                alert('code: ' + error.code + '\n' +
+                    'message: ' + error.message + '\n');
+            }
 
-        var watchOptions = {
-            frequency : 1000,
-            timeout : 3000,
-            enableHighAccuracy: false // may cause errors if true
-        };
-
-        var watch = $cordovaGeolocation.watchPosition(watchOptions);
-        watch.then(
-            null,
-            function(err) {
-                // error
-            },
-            function(position) {
-                var lat  = position.coords.latitude
-                var long = position.coords.longitude
-            });
+// Options: throw an error if no update is received every 30 seconds.
+//
+            var options = {maximumAge: 0, timeout: 10000, enableHighAccuracy: false};
+            navigator.geolocation.watchPosition(onSuccess, onError, options);
+        }
 })
 
 .controller('MapController', function($scope, $ionicLoading) {
