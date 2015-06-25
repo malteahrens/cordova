@@ -17,24 +17,26 @@ angular.module('starter.controllers', [])
 //   This method accepts a `Position` object, which contains
 //   the current GPS coordinates
 //
-        function onSuccess(position) {
-            var element = document.getElementById('geolocation');
-            element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
-                'Longitude: ' + position.coords.longitude     + '<br />' +
-                '<hr />'      + element.innerHTML;
-        }
+        $ionicPlatform.ready(function() {
+            function onSuccess(position) {
+                var element = document.getElementById('geolocation');
+                element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
+                    'Longitude: ' + position.coords.longitude + '<br />' +
+                    '<hr />' + element.innerHTML;
+            }
 
 // onError Callback receives a PositionError object
 //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                'message: ' + error.message + '\n');
-        }
+            function onError(error) {
+                alert('code: ' + error.code + '\n' +
+                    'message: ' + error.message + '\n');
+            }
 
 // Options: throw an error if no update is received every 30 seconds.
 //
-        var options = {maximumAge: 0, timeout: 10000, enableHighAccuracy:true};
-        navigator.geolocation.watchPosition(onSuccess);
+            var options = {maximumAge: 0, timeout: 10000, enableHighAccuracy: true};
+            navigator.geolocation.watchPosition(onSuccess);
+        }
 })
 
 .controller('MapController', function($scope, $ionicLoading) {
