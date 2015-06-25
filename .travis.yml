@@ -34,7 +34,7 @@ script:
   - grunt build
   - ls platforms/android/ant-build/
   #- "/bin/cp /home/travis/build/malteahrens/cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk"
-  - "/bin/cp platforms/android/build/outputs/apk/ dev/android-armv7-debug.apk"
+  - "/bin/cp platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk"
   #- "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
   - sh ./dev/scripts/github.sh
 
