@@ -49,6 +49,8 @@
 
             <uses-permission android:name="android.permission.READ_CONTACTS" android:maxSdkVersion="15" />
             <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
         </config-file>
     </platform>
 
