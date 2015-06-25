@@ -56,7 +56,8 @@ angular.module('starter.controllers', [])
 
 // Options: throw an error if no update is received every 30 seconds.
 //
-        var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+        var options = {maximumAge: 0, timeout: 10000, enableHighAccuracy:true};
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 })
 
 .controller('MapController', function($scope, $ionicLoading) {
