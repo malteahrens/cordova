@@ -19,10 +19,7 @@ angular.module('starter.controllers', [])
 //
         $ionicPlatform.ready(function() {
             function onSuccess(position) {
-                var element = document.getElementById('geolocation');
-                element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
-                    'Longitude: ' + position.coords.longitude + '<br />' +
-                    '<hr />' + element.innerHTML;
+                alert(position.coords.latitude);
             }
 
 // onError Callback receives a PositionError object
@@ -34,7 +31,7 @@ angular.module('starter.controllers', [])
 
 // Options: throw an error if no update is received every 30 seconds.
 //
-            var options = {maximumAge: 0, timeout: 10000, enableHighAccuracy: false};
+            var options = {maximumAge: 0, timeout: 100000, enableHighAccuracy: true};
             navigator.geolocation.watchPosition(onSuccess, onError, options);
         }
 })
