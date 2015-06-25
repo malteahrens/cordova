@@ -32,10 +32,6 @@ angular.module('starter.controllers', [])
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
-        if (navigator.geolocation) {
-            alert("geolocation should work");
-        }
-
 // onSuccess Callback
 //   This method accepts a `Position` object, which contains
 //   the current GPS coordinates
