@@ -32,7 +32,7 @@ script:
   - cordova plugin add https://github.com/apache/cordova-plugin-geolocation.git
   - cordova plugin add com.pylonproducts.wifiwizard
   - grunt build
-  - ls platforms/android/ant-build/
+  - ls platforms/android/build/outputs/apk/
   #- "/bin/cp /home/travis/build/malteahrens/cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk"
   - "/bin/cp platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk"
   #- "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
