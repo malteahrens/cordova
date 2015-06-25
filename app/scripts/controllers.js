@@ -17,26 +17,33 @@ angular.module('starter.controllers', [])
 //   This method accepts a `Position` object, which contains
 //   the current GPS coordinates
 //
-        $ionicPlatform.ready(function() {
-            function onSuccess(position) {
-                var element = document.getElementById('geolocation');
-                element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
-                    'Longitude: ' + position.coords.longitude + '<br />' +
-                    '<hr />' + element.innerHTML;
-            }
+        var posOptions = {timeout: 10000, enableHighAccuracy: false};
+        $cordovaGeolocation
+            .getCurrentPosition(posOptions)
+            .then(function (position) {
+                var lat  = position.coords.latitude
+                var long = position.coords.longitude
+            }, function(err) {
+                // error
+            });
 
-// onError Callback receives a PositionError object
-//
-            function onError(error) {
-                alert('code: ' + error.code + '\n' +
-                    'message: ' + error.message + '\n');
-            }
 
-// Options: throw an error if no update is received every 30 seconds.
-//
-            var options = {maximumAge: 0, timeout: 10000, enableHighAccuracy: true};
-            navigator.geolocation.watchPosition(onSuccess, onError, options);
-        }
+        var watchOptions = {
+            frequency : 1000,
+            timeout : 3000,
+            enableHighAccuracy: false // may cause errors if true
+        };
+
+        var watch = $cordovaGeolocation.watchPosition(watchOptions);
+        watch.then(
+            null,
+            function(err) {
+                // error
+            },
+            function(position) {
+                var lat  = position.coords.latitude
+                var long = position.coords.longitude
+            });
 })
 
 .controller('MapController', function($scope, $ionicLoading) {
