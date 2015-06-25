@@ -29,8 +29,8 @@
     <platform name="android">
         //These preferences are actually available in Cordova by default although not currently documented
         <preference name="android-minSdkVersion" value="8" />
-        <preference name="android-maxSdkVersion" value="19" />
-        <preference name="android-targetSdkVersion" value="19" />
+        <preference name="android-maxSdkVersion" value="22" />
+        <preference name="android-targetSdkVersion" value="22" />
 
         //custom preferences examples
         <preference name="android-windowSoftInputMode" value="stateVisible" />
@@ -49,8 +49,6 @@
 
             <uses-permission android:name="android.permission.READ_CONTACTS" android:maxSdkVersion="15" />
             <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-            <uses-permission android:name="android.permission.INTERNET" />
-            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
         </config-file>
     </platform>
 
