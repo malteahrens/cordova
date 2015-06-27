@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, Geo) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -12,29 +12,18 @@ angular.module('starter.controllers', [])
             interactive: true
         });
 
-
-// onSuccess Callback
-//   This method accepts a `Position` object, which contains
-//   the current GPS coordinates
-//
+        var options = {maximumAge: 0, timeout: 100000, enableHighAccuracy:true};
         function onSuccess(position) {
-            var element = document.getElementById('geolocation');
-            element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
-                'Longitude: ' + position.coords.longitude     + '<br />' +
-                '<hr />'      + element.innerHTML;
+            var location1 = [position.coords.latitude, position.coords.longitude];
+            var location2 = [position.coords.longitude, position.coords.latitude];
+            map.easeTo({ center: location1, duration: 0 });
         }
 
-// onError Callback receives a PositionError object
-//
         function onError(error) {
             alert('code: '    + error.code    + '\n' +
                 'message: ' + error.message + '\n');
         }
-
-// Options: throw an error if no update is received every 30 seconds.
-//
-        var options = {maximumAge: 0, timeout: 100000, enableHighAccuracy:true};
-        navigator.geolocation.watchPosition(onSuccess, onError, options);
+        Geo.getLocation(onSuccess, onError, options);
 })
 
 .controller('MapController', function($scope, $ionicLoading) {

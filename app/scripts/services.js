@@ -50,16 +50,34 @@ angular.module('starter.services', [])
 })
 
 .factory('Geo', ['$q', function($q){
-    return {
-        getLocation: function(options){
-            var q = $q.defer();
-            navigator.geolocation.watchPosition(function (pos) {
-                //var latLng = new google.maps.LatLng(, pos.coords.longitude);
-                q.resolve("here");
-            }, function (error) {
-                q.reject(error)
-            }, options);
-            return q.promise;
+    var watchPosition = function(options) {
+        var q = $q.defer();
+        var watchId;
+        var start = function(success, error) {
+            watchId = navigator.geolocation.watchPosition(success, error);
+            q.resolve("here");
         }
+        var stop = function() {
+            if (watchId) {
+                navigator.geolocation.clearWatch(watchId);
+            }
+        }
+        return q.promise;
+    };
+
+    var getLocation = function(onSuccess, onError, options){
+        var q = $q.defer();
+        navigator.geolocation.watchPosition(function (position) {
+            onSuccess(position)
+            q.resolve();
+        }, function (error) {
+            q.reject(error)
+        }, options);
+        return q.promise;
+    };
+
+    return {
+        getLocation: getLocation,
+        watchPosition: watchPosition
     }
 }])
