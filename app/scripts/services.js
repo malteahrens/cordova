@@ -47,7 +47,7 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
 
 .factory('Geo', ['$q', function($q){
     return {
