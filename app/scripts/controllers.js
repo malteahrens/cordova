@@ -23,10 +23,13 @@ angular.module('starter.controllers', [])
             alert('code: '    + error.code    + '\n' +
                 'message: ' + error.message + '\n');
         }
-        Geo.getLocation(onSuccess, onError, options);
+
 
         $scope.$on('$ionicView.enter', function(){
-            console.log(Settings.map)
+            if(Settings.map.gps) {
+                Geo.getLocation(onSuccess, onError, options);
+                console.log(Settings.map);
+            }
         });
 
     })

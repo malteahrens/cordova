@@ -88,7 +88,16 @@ angular.module('starter.services', [])
     };
     var toggleGps = function() {
         map.gps = !map.gps;
+        save(map);
         return map.gps;
+    };
+    var save = function(settings) {
+        window.localStorage['settings'] = JSON.stringify(map);
+        console.log("save config...");
+    };
+    var load = function() {
+        map = JSON.parse(window.localStorage['settings'] || '{}');
+        console.log("load config");
     };
     return {
         toggleGps: toggleGps,
