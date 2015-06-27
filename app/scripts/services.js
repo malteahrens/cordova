@@ -81,3 +81,17 @@ angular.module('starter.services', [])
         watchPosition: watchPosition
     }
 }])
+
+.factory('Settings', function() {
+    var map = {
+        gps: true
+    };
+    var toggleGps = function() {
+        map.gps = !map.gps;
+        return map.gps;
+    };
+    return {
+        toggleGps: toggleGps,
+        map: map
+    }
+})

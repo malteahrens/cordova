@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, Geo) {
+.controller('DashCtrl', function($rootScope, $scope, Settings, Geo) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -24,7 +24,12 @@ angular.module('starter.controllers', [])
                 'message: ' + error.message + '\n');
         }
         Geo.getLocation(onSuccess, onError, options);
-})
+
+        $scope.$on('$ionicView.enter', function(){
+            console.log(Settings.map)
+        });
+
+    })
 
 .controller('MapController', function($scope, $ionicLoading) {
 
@@ -52,8 +57,18 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('SettingsCtrl', function($scope) {
-  $scope.settings = {
-    enableGpsTracking: true
+.controller('SettingsCtrl', function($rootScope, $scope, Settings) {
+  $scope.gps = Settings.map.gps;
+  $scope.toggleGps = function() {
+      $scope.gps = Settings.toggleGps();
+      broadcast($scope.gps);
   };
+
+  $scope.$watch('gps', function (newVal, oldVal) {
+    console.log("GPS set to: "+newVal);
+  });
+
+    $scope.settings = {
+        enableGpsTracking: true
+    };
 });

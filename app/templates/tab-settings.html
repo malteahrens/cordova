@@ -2,7 +2,7 @@
   <ion-content>
     <div class="item item-divider">Map</div>
     <ion-list>
-        <ion-toggle  ng-model="settings.enableGpsTracking">
+        <ion-toggle  ng-model="settings.enableGpsTracking" ng-change="toggleGps()">
             Enable GPS
         </ion-toggle>
         <ion-toggle  ng-model="settings.enableGpsTracking">
@@ -11,7 +11,7 @@
     </ion-list>
     <div class="item item-divider">WLAN</div>
       <ion-list>
-          <ion-toggle  ng-model="settings.enableGpsTracking">
+          <ion-toggle  ng-model="settings.enableGpsTracking" ng-change="toggleGps()">
               Enable WIFI scan
           </ion-toggle>
           <ion-toggle  ng-model="settings.enableGpsTracking">
