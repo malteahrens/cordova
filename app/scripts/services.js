@@ -86,21 +86,29 @@ angular.module('starter.services', [])
     var map = {
         gps: true
     };
+
     var toggleGps = function() {
-        map.gps = !map.gps;
-        save(map);
-        return map.gps;
+        this.map.gps = !this.map.gps;
+        save(this.map);
+        return this.map.gps;
     };
-    var save = function(settings) {
+
+    var save = function(map) {
+        console.log(map);
         window.localStorage['settings'] = JSON.stringify(map);
         console.log("save config...");
     };
+
+    // will be triggered when $ionicPlatform.ready in app.js
     var load = function() {
-        map = JSON.parse(window.localStorage['settings'] || '{}');
-        console.log("load config");
+        this.map = JSON.parse(window.localStorage['settings'] || map);
+        console.log("load config...");
+        console.log(this.map);
     };
+
     return {
         toggleGps: toggleGps,
-        map: map
+        map: map,
+        load: load
     }
 })

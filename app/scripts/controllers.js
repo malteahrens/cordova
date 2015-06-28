@@ -24,11 +24,10 @@ angular.module('starter.controllers', [])
                 'message: ' + error.message + '\n');
         }
 
-
-        $scope.$on('$ionicView.enter', function(){
+        $scope.$on('$ionicView.enter', function() {
             if(Settings.map.gps) {
                 Geo.getLocation(onSuccess, onError, options);
-                console.log(Settings.map);
+                console.log("gps is enabled");
             }
         });
 
@@ -54,6 +53,10 @@ angular.module('starter.controllers', [])
   $scope.remove = function(chat) {
     Chats.remove(chat);
   }
+
+    WifiWizard.getScanResults(function(wifis) {
+        alert(wifis);
+    })
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -61,17 +64,15 @@ angular.module('starter.controllers', [])
 })
 
 .controller('SettingsCtrl', function($rootScope, $scope, Settings) {
-  $scope.gps = Settings.map.gps;
-  $scope.toggleGps = function() {
-      $scope.gps = Settings.toggleGps();
-      broadcast($scope.gps);
+  $scope.toggleGpsTracking = function() {
+      $scope.settings.enableGpsTracking = Settings.toggleGps();
   };
 
-  $scope.$watch('gps', function (newVal, oldVal) {
+  $scope.$watch('enableGpsTracking', function (newVal, oldVal) {
     console.log("GPS set to: "+newVal);
   });
 
     $scope.settings = {
-        enableGpsTracking: true
+        enableGpsTracking: Settings.map.gps
     };
 });

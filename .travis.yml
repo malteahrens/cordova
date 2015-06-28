@@ -30,7 +30,7 @@ script:
   - ionic browser add crosswalk@10.39.236.1
   - ionic resources --splash
   - cordova plugin add cordova-plugin-geolocation
-  - cordova plugin add com.pylonproducts.wifiwizard
+  - cordova plugin add https://github.com/parsonsmatt/WifiWizard.git
   - grunt build
   - ls platforms/android/build/outputs/apk/
   #- "/bin/cp /home/travis/build/malteahrens/cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk"
