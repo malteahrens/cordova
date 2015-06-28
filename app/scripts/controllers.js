@@ -12,18 +12,19 @@ angular.module('starter.controllers', [])
             interactive: true
         });
         map.addControl(new mapboxgl.Navigation());
+        map.setPitch(60);
 
-        var options = {maximumAge: 0, timeout: 100000, enableHighAccuracy:true};
+        var options = {maximumAge: 0, timeout: 100000, enableHighAccuracy:true}
         function onSuccess(position) {
             var location1 = [position.coords.latitude, position.coords.longitude];
             var location2 = [position.coords.longitude, position.coords.latitude];
             map.easeTo({ center: location1, duration: 0 });
-        }
+        };
 
         function onError(error) {
             alert('code: '    + error.code    + '\n' +
                 'message: ' + error.message + '\n');
-        }
+        };
 
         $scope.$on('$ionicView.enter', function() {
             if(Settings.map.gps) {
@@ -71,9 +72,21 @@ angular.module('starter.controllers', [])
     console.log("GPS set to: "+newVal);
   });
 
+    console.log(Settings.map.bearing)
     $scope.settings = {
-        enableGpsTracking: Settings.map.gps
+        map: {
+            gps: Settings.map.gps,
+            bearing: Settings.map.bearing
+        }
     };
+
+
+    window.addEventListener('native.keyboardhide', keyboardHideHandler);
+    function keyboardHideHandler(e){
+        $scope.settings.mapBearing =  $scope.settings.mapBearing;
+        Settings.save($scope.settings.map)
+        console.log(JSON.stringify($scope.settings));
+    }
 })
 
 .controller('DebugCtrl', function($scope, Debug) {

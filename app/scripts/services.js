@@ -72,9 +72,10 @@ angular.module('starter.services', [])
     }
 }])
 
-.factory('Settings', function() {
+.factory('Settings', function(Debug) {
     var map = {
-        gps: true
+        gps: true,
+        bearing: 60
     };
 
     var toggleGps = function() {
@@ -91,14 +92,18 @@ angular.module('starter.services', [])
 
     // will be triggered when $ionicPlatform.ready in app.js
     var load = function() {
-        this.map = JSON.parse(window.localStorage['settings'] || map);
-        console.log("load config...");
-        console.log(this.map);
+        try {
+            this.map = JSON.parse(window.localStorage['settings'] || map);
+        } catch(e) {
+            Debug.trace("error loading the config from localStorage. Will fall back to default settings.");
+            this.map = map;
+        }
     };
 
     return {
         toggleGps: toggleGps,
         map: map,
+        save: save,
         load: load
     }
 })
@@ -121,4 +126,4 @@ angular.module('starter.services', [])
         trace: trace,
         all: all
     }
-})
+});

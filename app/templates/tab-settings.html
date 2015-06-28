@@ -2,12 +2,22 @@
   <ion-content>
     <div class="item item-divider">Map</div>
     <ion-list>
-        <ion-toggle  ng-model="settings.enableGpsTracking" ng-change="toggleGpsTracking()">
+        <ion-toggle  ng-model="settings.map.gps" ng-change="toggleGpsTracking()">
             Enable GPS
         </ion-toggle>
         <ion-toggle  ng-model="settings.enableGpsTracking">
             Move map to your location
         </ion-toggle>
+        <label class="item item-input">
+            <div class="row">
+                <div class="col-50">
+                    <span class="input-label">Map Bearing</span>
+                </div>
+                <div class="col-25 col-offset-25">
+                    <input type="number" ng-model="settings.map.bearing" >
+                </div>
+            </div>
+        </label>
     </ion-list>
     <div class="item item-divider">WLAN</div>
       <ion-list>
