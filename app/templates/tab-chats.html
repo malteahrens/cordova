@@ -4,9 +4,9 @@
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
         <img ng-src="">
         <h2>{{chat.bssid}}</h2>
-        <p>{{chat.ssid}}</p>
+        <p>{{chat.SSID}}</p>
         <p>{{chat.level}}</p>
-        <p>{{chat.bssid}}</p>
+        <p>{{chat.BSSID}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
