@@ -55,8 +55,8 @@ angular.module('starter.controllers', [])
   }
 
     WifiWizard.getScanResults(function(wifis) {
-        alert(wifis);
-    })
+        $scope.chats=wifis;
+    });
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
