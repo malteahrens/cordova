@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($rootScope, $scope, Settings, Geo) {
+.controller('MapCtrl', function($rootScope, $scope, Settings, Debug, Geo) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -32,7 +32,7 @@ angular.module('starter.controllers', [])
                 console.log("gps is enabled");
             }
             if(Settings.map.bearing) {
-                console.log("setting bearing to: "+Settings.map.bearing);
+                Debug.trace("setting bearing to: "+Settings.map.bearing);
                 map.setPitch(Settings.map.bearing);
             }
         });
@@ -88,7 +88,7 @@ angular.module('starter.controllers', [])
     window.addEventListener('native.keyboardhide', keyboardHideHandler);
     function keyboardHideHandler(e){
         Settings.save($scope.settings.map)
-        console.log(JSON.stringify($scope.settings));
+        Debug.trace(JSON.stringify($scope.settings));
     }
 })
 

@@ -88,7 +88,7 @@ angular.module('starter.services', [])
         this.map = map;
         window.localStorage['settings'] = JSON.stringify(map);
         console.log("save config...");
-        console.log(map);
+        Debug.trace(map);
     };
 
     // will be triggered when $ionicPlatform.ready in app.js
