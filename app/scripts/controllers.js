@@ -12,7 +12,7 @@ angular.module('starter.controllers', [])
             interactive: true
         });
         map.addControl(new mapboxgl.Navigation());
-        map.setPitch(60);
+        map.setPitch(Settings.map.bearing);
 
         var options = {maximumAge: 0, timeout: 100000, enableHighAccuracy:true}
         function onSuccess(position) {
@@ -30,6 +30,8 @@ angular.module('starter.controllers', [])
             if(Settings.map.gps) {
                 Geo.getLocation(onSuccess, onError, options);
                 console.log("gps is enabled");
+                console.log("bearing: "+Settings.map.bearing);
+                map.setPitch(Settings.map.bearing);
             }
         });
 
