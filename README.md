@@ -5,7 +5,7 @@ The project was bootstrapped with [ionic-angular-cordova-seed]
 
 ## Useful development hints
 grunt serve
-ionic serve --lab
+ionic serve --lab --consolelogs 
 
 ## Switch API version
 Change:

@@ -11,6 +11,7 @@ angular.module('starter.controllers', [])
             maxZoom: 20,
             interactive: true
         });
+        map.addControl(new mapboxgl.Navigation());
 
         var options = {maximumAge: 0, timeout: 100000, enableHighAccuracy:true};
         function onSuccess(position) {
