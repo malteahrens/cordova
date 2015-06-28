@@ -30,7 +30,9 @@ angular.module('starter.controllers', [])
             if(Settings.map.gps) {
                 Geo.getLocation(onSuccess, onError, options);
                 console.log("gps is enabled");
-                console.log("bearing: "+Settings.map.bearing);
+            }
+            if(Settings.map.bearing) {
+                console.log("setting bearing to: "+Settings.map.bearing);
                 map.setPitch(Settings.map.bearing);
             }
         });
@@ -85,7 +87,6 @@ angular.module('starter.controllers', [])
 
     window.addEventListener('native.keyboardhide', keyboardHideHandler);
     function keyboardHideHandler(e){
-        $scope.settings.mapBearing =  $scope.settings.mapBearing;
         Settings.save($scope.settings.map)
         console.log(JSON.stringify($scope.settings));
     }
