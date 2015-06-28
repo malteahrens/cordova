@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($rootScope, $scope, Settings, Geo) {
+.controller('MapCtrl', function($rootScope, $scope, Settings, Geo) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -33,11 +33,7 @@ angular.module('starter.controllers', [])
 
     })
 
-.controller('MapController', function($scope, $ionicLoading) {
-
-})
-
-.controller('WifiController', function($scope, $ionicLoading) {
+.controller('ExperimentsCtrl', function($scope, $ionicLoading) {
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -77,4 +73,9 @@ angular.module('starter.controllers', [])
     $scope.settings = {
         enableGpsTracking: Settings.map.gps
     };
+})
+
+.controller('DebugCtrl', function($scope, Debug) {
+    $scope.log = Debug.all();
+    Debug.trace("I'm now in debug view...");
 });

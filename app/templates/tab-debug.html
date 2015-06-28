@@ -1,0 +1,5 @@
+<ion-view cache-view="false" view-title="Debug">
+  <ion-content class="padding">
+    <div ng-repeat="entry in log">{{entry.time | date:'hh:mm:sss'}} - {{entry.text}}</div>
+  </ion-content>
+</ion-view>

@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
+.factory('Chats', function(Debug) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -18,6 +18,8 @@ angular.module('starter.services', [])
           "BSSID": "3456" // MAC address of WiFi router as string
       }
   ];
+
+  Debug.trace("Chats");
 
   return {
     all: function() {
@@ -98,5 +100,25 @@ angular.module('starter.services', [])
         toggleGps: toggleGps,
         map: map,
         load: load
+    }
+})
+
+.factory('Debug', function() {
+    var log=[];
+    var trace=function(object){
+        console.log("add to log object...");
+        log.push({
+            text: object,
+            time: Date.now()
+        })
+    }
+
+    var all = function() {
+        return log;
+    }
+
+    return {
+        trace: trace,
+        all: all
     }
 })
