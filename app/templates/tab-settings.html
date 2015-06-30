@@ -2,10 +2,10 @@
   <ion-content>
     <div class="item item-divider">Map</div>
     <ion-list>
-        <ion-toggle  ng-model="settings.map.gps" ng-change="toggleGpsTracking()">
+        <ion-toggle  ng-model="settings.map.activateGps">
             Enable GPS
         </ion-toggle>
-        <ion-toggle  ng-model="settings.enableGpsTracking">
+        <ion-toggle  ng-model="settings.map.followGps">
             Move map to your location
         </ion-toggle>
         <label class="item item-input">

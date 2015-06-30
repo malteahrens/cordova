@@ -40,49 +40,47 @@ angular.module('starter.services', [])
 })
 
 .factory('Geo', ['$q', function($q){
-    var watchPosition = function(options) {
+    this_ = this
+    this_.watchId = 333;
+    var startWatch = function(onSuccess, onError, options){
         var q = $q.defer();
-        var watchId;
-        var start = function(success, error) {
-            watchId = navigator.geolocation.watchPosition(success, error);
-            q.resolve("here");
-        }
-        var stop = function() {
-            if (watchId) {
-                navigator.geolocation.clearWatch(watchId);
-            }
-        }
-        return q.promise;
-    };
-
-    var getLocation = function(onSuccess, onError, options){
-        var q = $q.defer();
-        navigator.geolocation.watchPosition(function (position) {
+        this_.watchId = navigator.geolocation.watchPosition(function (position) {
             onSuccess(position)
             q.resolve();
         }, function (error) {
             q.reject(error)
         }, options);
         return q.promise;
-    };
+    }
+    var stopWatch = function() {
+        console.log("Heeereee");
+        console.log(this_.watchId);
+        if (this_.watchId) {
+            navigator.geolocation.clearWatch(this_.watchId);
+            console.log("clear watch");
+        }
+    }
 
     return {
-        getLocation: getLocation,
-        watchPosition: watchPosition
+        startWatch: startWatch,
+        stopWatch: stopWatch
     }
 }])
 
 .factory('Settings', function(Debug) {
     var map = {
-        gps: true,
-        bearing: 60
+        activateGps: true,
+        followGps: true,
+        bearing: 0
     };
 
-    var toggleGps = function() {
-        this.map.gps = !this.map.gps;
-        save(this.map);
-        return this.map.gps;
-    };
+    var check = function(setting, func) {
+        if(setting in map) {
+            return map[setting];
+        } else {
+            return false;
+        }
+    }
 
     var save = function(map) {
         this.map = map;
@@ -102,22 +100,29 @@ angular.module('starter.services', [])
     };
 
     return {
-        toggleGps: toggleGps,
         map: map,
         save: save,
-        load: load
+        load: load,
+        check: check
     }
 })
 
 .factory('Debug', function() {
     var log=[];
-    var trace=function(object){
-        console.log("add to log object...");
+
+    var trace=function(text, category, source){
+        if(typeof text === 'object') {
+            text = JSON.stringify(text, null, 2);
+        }
         log.push({
-            text: object,
-            time: Date.now()
+            text: text,
+            time: Date.now(),
+            category: category,
+            source: source
         })
+        console.log(text);
     }
+
 
     var all = function() {
         return log;
