@@ -53,7 +53,6 @@ angular.module('starter.services', [])
         return q.promise;
     }
     var stopWatch = function() {
-        console.log("Heeereee");
         console.log(this_.watchId);
         if (this_.watchId) {
             navigator.geolocation.clearWatch(this_.watchId);
@@ -83,6 +82,9 @@ angular.module('starter.services', [])
     }
 
     var save = function(map) {
+        if(map.bearing === 0) {
+            map.bearing = 1
+        };
         this.map = map;
         window.localStorage['settings'] = JSON.stringify(map);
         console.log("save config...");
