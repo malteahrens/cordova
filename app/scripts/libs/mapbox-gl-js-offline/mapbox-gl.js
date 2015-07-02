@@ -3985,7 +3985,7 @@
         },
 
         _loadTile: function(tile) {
-            //var overscaling = tile.coord.z > this.maxzoom ? Math.pow(2, tile.coord.z - this.maxzoom) : 1;
+            var overscaling = tile.coord.z > this.maxzoom ? Math.pow(2, tile.coord.z - this.maxzoom) : 1;
             var params = {
                 uid: tile.uid,
                 coord: tile.coord,
