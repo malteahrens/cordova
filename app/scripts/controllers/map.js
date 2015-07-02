@@ -4,8 +4,8 @@ angular.module('starter')
     var map = new mapboxgl.Map({
         container: 'map',
         zoom: 12.5,
-        center: [48.4338176, 9.255932499999972],
-        style: 'styles/bright-v7.json',
+        center: [48.14882451158226, 11.451873779296875],
+        style: 'https://www.mapbox.com/mapbox-gl-styles/styles/bright-v7.json',
         minZoom: 9,
         maxZoom: 20,
         interactive: true
@@ -164,8 +164,6 @@ angular.module('starter')
         if (Settings.map.bearing) {
             Debug.trace("setting bearing to: " + Settings.map.bearing);
             map.setPitch(Settings.map.bearing);
-            // fix bug with keyboard
-            map.resize();
         }
     });
 })
