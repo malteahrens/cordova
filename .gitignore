@@ -13,3 +13,5 @@ plugins
 *.DS_Store
 resources
 app/scripts/configuration.js
+
+dev/vectorTiles/bayern.mbtiles

@@ -1,0 +1,26 @@
+--- plugins/com.rjfun.cordova.httpd/src/android/NanoHTTPD.java	2015-07-05 22:58:38.000000000 +0200
++++ plugins/com.rjfun.cordova.httpd/src/android/NanoHTTPD_new.java	2015-07-05 21:34:24.000000000 +0200
+@@ -469,6 +469,11 @@
+ 				if ( method.equalsIgnoreCase( "PUT" ))
+ 					files.put("content", saveTmpFile( fbuf, 0, f.size()));
+ 
++                if (Method.OPTIONS.equals(httpmethod)) {
++                    //Give valid response to OPTIONS request coming from CORS implementations
++                    resp = new NanoHTTPD.Response(Status.OK, MIME_PLAINTEXT ,"");
++                }
++
+ 				// Ok, now do the serve()
+ 				Response r = serve( uri, method, header, parms, files );
+ 				if ( r == null )
+@@ -1093,6 +1098,11 @@
+ 		}
+ 
+ 		res.addHeader( "Accept-Ranges", "bytes"); // Announce that the file server accepts partial content requestes
++        resp.addHeader("Access-Control-Allow-Origin", "*");
++        resp.addHeader("Access-Control-Max-Age", "3628800");
++        resp.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
++        resp.addHeader("Access-Control-Allow-Headers", "X-Requested-With");
++        resp.addHeader("Access-Control-Allow-Headers", "Authorization");
+ 		return res;
+ 	}
+ 
