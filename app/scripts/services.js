@@ -134,7 +134,7 @@ angular.module('starter.services', [])
     }
 })
 
-.factory('Server', function() {
+.factory('Server', function(Debug) {
     console.log("server loader");
     var httpd = null;
 
@@ -191,10 +191,10 @@ angular.module('starter.services', [])
                         // the ip is the active network connection
                         // if no wifi or no cell, "127.0.0.1" will be returned.
                         //document.getElementById('url').innerHTML = "server is started: <a href='" + url + "' target='_blank'>" + url + "</a>";
-                        console.log("server is started: "+url)
+                        Debug.trace("Server is started: "+url);
                     }, function( error ){
                         //document.getElementById('url').innerHTML = 'failed to start server: ' + error;
-                        console.log('failed to start server: ' + error);
+                        Debug.trace('failed to start server: ' + error);
                     });
                 }
 
