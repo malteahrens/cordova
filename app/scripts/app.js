@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-    .run(function($ionicPlatform, Settings) {
+    .run(function($ionicPlatform, Settings, Server) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -20,8 +20,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
             // load settings from localStorage
             Settings.load();
-            //Server.updateStatus();
 
+            // serve assets via server
+            var corHttpd = cordova.plugins.CorHttpd;
+            Server.init(corHttpd);
+            Server.startServer();
+            //Server.updateStatus();
         });
     })
 

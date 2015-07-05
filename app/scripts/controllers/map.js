@@ -3,9 +3,9 @@ angular.module('starter')
     mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
     var map = new mapboxgl.Map({
         container: 'map',
-        zoom: 12.5,
-        center: [48.14882451158226, 11.451873779296875],
-        style: 'https://www.mapbox.com/mapbox-gl-styles/styles/bright-v7.json',
+        zoom: 12,
+        center: [47.166000, 9.555373],
+        style: 'styles/minimal.json',
         minZoom: 9,
         maxZoom: 20,
         interactive: true
