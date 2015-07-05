@@ -1,0 +1,14 @@
+{
+    "name": "vectorTiles",
+    "version": "0.0.0",
+    "private": true,
+    "dependencies": {},
+    "devDependencies": {
+        "tilelive": "~5.8.1",
+        "mbtiles": "~0.8.0",
+        "express": "~4.13.0"
+    },
+    "engines": {
+        "node": ">=0.12.0"
+    }
+}

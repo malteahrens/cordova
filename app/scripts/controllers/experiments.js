@@ -1,3 +1,4 @@
 angular.module('starter.controllers', [])
-.controller('ExperimentsCtrl', function ($scope, $ionicLoading) {
-})
+.controller('ExperimentsCtrl', ['$scope', function ($scope) {
+
+}])

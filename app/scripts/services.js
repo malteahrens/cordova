@@ -132,4 +132,4 @@ angular.module('starter.services', [])
         trace: trace,
         all: all
     }
-});
+})

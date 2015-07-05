@@ -20,6 +20,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
             // load settings from localStorage
             Settings.load();
+            //Server.updateStatus();
+
         });
     })
 
