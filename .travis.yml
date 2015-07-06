@@ -32,8 +32,9 @@ script:
   - cordova plugin add cordova-plugin-geolocation
   - cordova plugin add https://github.com/parsonsmatt/WifiWizard.git
   # install webserver and patch to support CORS
-  - cordova plugin add https://github.com/floatinghotpot/cordova-httpd.git
-  - patch plugins/com.rjfun.cordova.httpd/src/android/NanoHTTPD.java  < dev/patches/patchHttpd.txt
+  - cordova plugin add https://github.com/malteahrens/cordova-httpd.git
+  #- cordova plugin add https://github.com/floatinghotpot/cordova-httpd.git
+  #- patch plugins/com.rjfun.cordova.httpd/src/android/NanoHTTPD.java  < dev/patches/patchHttpd.txt
   - grunt build
   - ls platforms/android/build/outputs/apk/
   #- "/bin/cp /home/travis/build/malteahrens/cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk"
