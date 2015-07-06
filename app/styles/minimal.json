@@ -8,7 +8,7 @@
         "osm_roads": {
             "type": "vector",
             "tiles": [
-                "http://192.168.1.5:8080/desktop/lichtenstein/{z}/{x}/{y}.pbf"
+                "http://localhost:8081/desktop/lichtenstein/{z}/{x}/{y}.pbf"
             ],
             "minzoom": 0,
             "maxzoom": 12
