@@ -164,6 +164,7 @@ angular.module('starter')
         if (Settings.map.bearing) {
             Debug.trace("setting bearing to: " + Settings.map.bearing);
             map.setPitch(Settings.map.bearing);
+            map.resize();
         }
     });
 })
