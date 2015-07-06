@@ -71,7 +71,8 @@ angular.module('starter.services', [])
     var map = {
         activateGps: true,
         followGps: true,
-        bearing: 0
+        bearing: 0,
+        server: false
     };
 
     var check = function(setting, func) {
@@ -134,7 +135,7 @@ angular.module('starter.services', [])
     }
 })
 
-.factory('Server', function(Debug) {
+.factory('Server', function(Debug, Settings) {
     console.log("server loader");
     var httpd = null;
 
@@ -185,7 +186,7 @@ angular.module('starter.services', [])
                     httpd.startServer({
                         'www_root' : wwwroot,
                         'port' : 8081,
-                        'localhost_only' : false
+                        'localhost_only' : Settings.map.server
                     }, function( url ){
                         // if server is up, it will return the url of http://<server ip>:port/
                         // the ip is the active network connection
