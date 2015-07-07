@@ -41,7 +41,7 @@ script:
   - "/bin/cp platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk"
   #- "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
   - sh ./dev/scripts/github.sh
- 
+
 env:
   global:
   - secure: P0SFVXYMJhNb3dX/Hx4rxjL/toViP0Vo0yXbMK/vwOsSrixkU84ltMGykBYTUztdAFJvsO0xrhKsdPbBmdjEF48emrmoymknxKYPIJ6NL1N6fy0EUoE6o7vBX+agthD/uhSNCJgXRK+giqxP5Htz3BkrU9VgdFdVrSqU9bsm4Bc=
