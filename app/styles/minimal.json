@@ -2,7 +2,8 @@
     "version": 7,
     "constants": {
         "@background": "#808080",
-        "@road": "#000000"
+        "@road": "#ff0000",
+        "@water": "#0000ff"
     },
     "sources": {
         "osm_roads": {
@@ -14,19 +15,30 @@
             "maxzoom": 12
         }
     },
-    "layers": [{
-        "id": "background",
-        "type": "background",
-        "paint": {
-            "background-color": "@background"
+    "layers": [
+        {
+            "id": "background",
+            "style": {
+                "background-color": "#fff"
+            },
+            "type": "background"
+        },
+        {
+            "id": "roads",
+            "type": "line",
+            "source": "osm_roads",
+            "source-layer": "roads",
+            "paint": {
+                "line-color": "@road"
+            }
+        },
+        {
+            "id": "water",
+            "source": "osm_roads",
+            "style": {
+                "fill-color": "@water"
+            },
+            "type": "fill"
         }
-    }, {
-        "id": "roads",
-        "type": "line",
-        "source": "osm_roads",
-        "source-layer": "roads",
-        "paint": {
-            "line-color": "@road"
-        }
-    }]
+    ]
 }
