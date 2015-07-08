@@ -25,6 +25,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             var corHttpd = cordova.plugins.CorHttpd;
             Server.init(corHttpd);
             Server.startServer();
+
+            var restartServer = function() {
+                Server.stopServer();
+                Server.startServer();
+            }
+            Settings.observer(restartServer);
             //Server.updateStatus();
         });
     })

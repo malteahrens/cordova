@@ -68,6 +68,26 @@ angular.module('starter.services', [])
 }])
 
 .factory('Settings', function(Debug) {
+        var observerCallbacks = [];
+
+        //register an observer
+        var registerObserverCallback = function(callback){
+            console.log("notify observer")
+            observerCallbacks.push(callback);
+        };
+
+        var notifyObservers = function(){
+            angular.forEach(observerCallbacks, function(callback){
+                callback();
+            });
+        };
+
+        window.addEventListener('native.keyboardhide', keyboardHideHandler);
+        function keyboardHideHandler(e) {
+            Settings.save($scope.settings.map)
+            Debug.trace(JSON.stringify($scope.settings));
+        }
+
     var map = {
         activateGps: true,
         followGps: true,
@@ -88,6 +108,7 @@ angular.module('starter.services', [])
         window.localStorage['settings'] = JSON.stringify(map);
         console.log("save config...");
         Debug.trace(map);
+        notifyObservers();
     };
 
     // will be triggered when $ionicPlatform.ready in app.js
@@ -104,7 +125,8 @@ angular.module('starter.services', [])
         map: map,
         save: save,
         load: load,
-        check: check
+        check: check,
+        observer: registerObserverCallback
     }
 })
 

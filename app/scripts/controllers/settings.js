@@ -32,12 +32,4 @@ angular.module('starter')
             Settings.save($scope.settings.map);
         }
     });
-
-    console.log(Settings.map.bearing)
-
-    window.addEventListener('native.keyboardhide', keyboardHideHandler);
-    function keyboardHideHandler(e) {
-        Settings.save($scope.settings.map)
-        Debug.trace(JSON.stringify($scope.settings));
-    }
 })
