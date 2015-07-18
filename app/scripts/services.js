@@ -207,7 +207,7 @@ angular.module('starter.services', [])
                      */
                     httpd.startServer({
                         'www_root' : wwwroot,
-                        'port' : 8081,
+                        'port' : 8100,
                         'localhost_only' : Settings.map.server
                     }, function( url ){
                         // if server is up, it will return the url of http://<server ip>:port/

@@ -4,8 +4,8 @@ angular.module('starter')
     var map = new mapboxgl.Map({
         container: 'map',
         zoom: 12,
-        center: [47.166000, 9.555373],
-        style: 'styles/minimal.json',
+        center: [48.14882451158226, 11.451873779296875],
+        style: 'https://www.mapbox.com/mapbox-gl-styles/styles/bright-v7.json',
         minZoom: 9,
         maxZoom: 20,
         interactive: true

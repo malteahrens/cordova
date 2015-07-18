@@ -1,32 +1,37 @@
 {
     "version": 7,
     "constants": {
-        "@background": "#808080",
-        "@road": "#000000"
+        "@background": "#ffffff",
+        "@road": "#ff0000",
+        "@water": "#0000ff"
     },
     "sources": {
         "osm_roads": {
             "type": "vector",
             "tiles": [
-                "http://192.168.1.5:8081/desktop/lichtenstein/{z}/{x}/{y}.pbf"
+                "http://localhost:8100/desktop/liechtenstein/{z}/{x}/{y}.pbf"
             ],
             "minzoom": 0,
             "maxzoom": 12
         }
     },
-    "layers": [{
-        "id": "background",
-        "type": "background",
-        "paint": {
-            "background-color": "@background"
+    "layers": [
+        {
+            "id": "roads",
+            "type": "line",
+            "source": "osm_roads",
+            "source-layer": "roads",
+            "paint": {
+                "line-color": "@road"
+            }
+        },
+        {
+            "id": "water",
+            "source": "osm_roads",
+            "style": {
+                "fill-color": "@water"
+            },
+            "type": "fill"
         }
-    }, {
-        "id": "roads",
-        "type": "line",
-        "source": "osm_roads",
-        "source-layer": "roads",
-        "paint": {
-            "line-color": "@road"
-        }
-    }]
+    ]
 }

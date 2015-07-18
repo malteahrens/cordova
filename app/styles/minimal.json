@@ -9,7 +9,7 @@
         "osm_roads": {
             "type": "vector",
             "tiles": [
-                "http://localhost:8081/desktop/lichtenstein/{z}/{x}/{y}.pbf"
+                "http://localhost:8100/desktop/liechtenstein/{z}/{x}/{y}.pbf"
             ],
             "minzoom": 0,
             "maxzoom": 12

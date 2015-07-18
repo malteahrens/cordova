@@ -3,8 +3,8 @@
 <head>
     <meta charset='UTF-8'/>
     <title>Mapbox GL JS rendering my own tiles</title>
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.8.1/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.8.1/mapbox-gl.css' rel='stylesheet' />
+    <script src='/scripts/libs/mapbox-gl-js-v0.8.1.js'></script>
+    <link href='/scripts/libs/mapbox-gl-js-v0.8.1.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0 }
         #map { position:absolute; top:0; bottom:50px; width:100%; }
@@ -19,7 +19,7 @@
         container: 'map',
         zoom: 12,
         center: [47.166000, 9.555373],
-        style: '/styles/minimal.json',
+        style: '/desktop/minimal.json',
         minZoom: 9,
         maxZoom: 20,
         interactive: true
