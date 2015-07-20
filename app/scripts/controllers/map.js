@@ -114,7 +114,6 @@ angular.module('starter')
     function onSuccess(position) {
         var location1 = [position.coords.latitude, position.coords.longitude];
         var location2 = [position.coords.longitude, position.coords.latitude];
-        map.easeTo({ center: location1, duration: 0 });
 
         var point = {
             "type": "Feature",
@@ -129,6 +128,11 @@ angular.module('starter')
 
         var radius = position.coords.accuracy * 0.001
         $scope.setBufferData("locationAccuracy", location2, radius);
+
+
+        if(Settings.map.followGps) {
+            map.easeTo({ center: location1, duration: 0 });
+        }
     };
 
     function onError(error) {

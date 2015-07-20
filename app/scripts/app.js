@@ -31,7 +31,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 Server.startServer();
             }
             Settings.observer(restartServer);
-            //Server.updateStatus();
         });
     })
 
