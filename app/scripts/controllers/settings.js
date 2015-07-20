@@ -4,6 +4,7 @@ angular.module('starter')
         map: {
             activateGps: Settings.map.activateGps,
             followGps: Settings.map.followGps,
+            rotate: Settings.map.rotate,
             bearing: Settings.map.bearing,
             server: Settings.map.server
         }
@@ -29,6 +30,14 @@ angular.module('starter')
         if(oldVal !== newVal) {
             console.log("server set to: " + newVal);
             $scope.settings.map.server = newVal;
+            Settings.save($scope.settings.map);
+        }
+    });
+
+    $scope.$watch('settings.map.rotate', function (newVal, oldVal) {
+        if(oldVal !== newVal) {
+            console.log("rotate set to: " + newVal);
+            $scope.settings.map.rotate = newVal;
             Settings.save($scope.settings.map);
         }
     });

@@ -6,14 +6,17 @@
             Enable GPS
         </ion-toggle>
         <ion-toggle  ng-model="settings.map.followGps">
-            Move map to your location
+            Follow Location
+        </ion-toggle>
+        <ion-toggle  ng-model="settings.map.rotate">
+            Rotate Map
         </ion-toggle>
         <label class="item item-input">
             <div class="row">
-                <div class="col-90">
+                <div class="col">
                     <span class="input-label">Map Pitch</span>
                 </div>
-                <div class="col">
+                <div class="col-75 col-offset-25">
                     <input type="number" ng-model="settings.map.bearing" >
                 </div>
             </div>

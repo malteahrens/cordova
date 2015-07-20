@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('MapCtrl', function ($rootScope, $scope, Settings, Debug, Geo) {
+.controller('MapCtrl', function ($rootScope, $scope, $window, Settings, Debug, Geo) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
     var map = new mapboxgl.Map({
         container: 'map',
@@ -19,6 +19,20 @@ angular.module('starter')
         $scope.addGeojsonLayer({'name':'locationHeading'});
         $scope.addGeojsonLayer({'name':'location'});
     });
+
+    // access the device compass sensor
+    $scope.headingSensor = 0;
+    if (window.DeviceOrientationEvent) {
+        $window.addEventListener('deviceorientation', function(event) {
+            if(Settings.map.rotateMap) {
+                map.setBearing(event.alpha);
+            }
+            //$scope.headingSensor = event.alpha;
+            //$scope.$apply();
+        }, false);
+    } else {
+        alert("no device orientation supported...");
+    }
 
     $scope.addGeojsonLayer = function(layer, visibility) {
         if(visibility === undefined){
@@ -100,6 +114,10 @@ angular.module('starter')
                 }
 
                 var buffered = turf.buffer(point, radius, 'kilometers')
+
+                // proj4js only supports simple point coordinates
+                //var reprojected = proj4('EPSG:4326','EPSG:3857',buffered);
+
                 layer.setData(buffered);
             } else {
                 console.log("Couldn't update data: layer not found");
