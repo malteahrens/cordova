@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('MapCtrl', function ($rootScope, $scope, $window, Settings, Debug, Geo) {
+.controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
     var map = new mapboxgl.Map({
         container: 'map',
@@ -23,13 +23,14 @@ angular.module('starter')
     // access the device compass sensor
     $scope.headingSensor = 0;
     if (window.DeviceOrientationEvent) {
+        var blocked = false;
         $window.addEventListener('deviceorientation', function(event) {
-            if(Settings.map.rotateMap) {
+            if(Settings.map.rotate && !blocked) {
+                blocked = true;
                 map.setBearing(event.alpha);
-                console.log("rotate to: "+event.alpha)
+                // after 2000ns allow to rotate the map again
+                $timeout(function() {blocked=false}, 2000);
             }
-            //$scope.headingSensor = event.alpha;
-            //$scope.$apply();
         }, false);
     } else {
         alert("no device orientation supported...");
@@ -178,11 +179,6 @@ angular.module('starter')
         } else {
             Geo.stopWatch();
             Debug.trace("gps is disable");
-        }
-        if (Settings.map.followGps) {
-            Debug.trace("followGps is enabled");
-        } else {
-            Debug.trace("followGps is disable");
         }
         if (Settings.map.bearing) {
             Debug.trace("setting bearing to: " + Settings.map.bearing);

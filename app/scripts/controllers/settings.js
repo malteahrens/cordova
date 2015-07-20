@@ -41,4 +41,9 @@ angular.module('starter')
             Settings.save($scope.settings.map);
         }
     });
+
+    window.addEventListener('native.keyboardhide', keyboardHideHandler);
+    function keyboardHideHandler(e) {
+        Settings.save($scope.settings.map);
+    }
 })

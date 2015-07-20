@@ -14,12 +14,6 @@ angular.module('starter')
         });
     };
 
-    window.addEventListener('native.keyboardhide', keyboardHideHandler);
-    function keyboardHideHandler(e) {
-        Settings.save($scope.settings.map)
-        Debug.trace(JSON.stringify($scope.settings));
-    }
-
     var map = {
         activateGps: true,
         followGps: true,
