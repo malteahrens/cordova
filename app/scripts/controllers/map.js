@@ -28,8 +28,8 @@ angular.module('starter')
             if(Settings.map.rotate && !blocked) {
                 blocked = true;
                 // only update if the change is greater than 5 degrees
-                if(Math.abs(event.alpha-oldValue) > 5) {
-                    map.setBearing(event.alpha);
+                if(Math.abs(event.alpha-oldValue) > 10) {
+                    map.rotateTo(event.alpha, {animate: true});
                     oldValue = event.alpha
                 }
                 // after 2000ns allow to rotate the map again
