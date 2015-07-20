@@ -26,6 +26,7 @@ angular.module('starter')
         $window.addEventListener('deviceorientation', function(event) {
             if(Settings.map.rotateMap) {
                 map.setBearing(event.alpha);
+                console.log("rotate to: "+event.alpha)
             }
             //$scope.headingSensor = event.alpha;
             //$scope.$apply();
