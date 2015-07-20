@@ -21,13 +21,17 @@ angular.module('starter')
     });
 
     // access the device compass sensor
-    $scope.headingSensor = 0;
     if (window.DeviceOrientationEvent) {
+        var oldValue = 0;
         var blocked = false;
         $window.addEventListener('deviceorientation', function(event) {
             if(Settings.map.rotate && !blocked) {
                 blocked = true;
-                map.setBearing(event.alpha);
+                // only update if the change is greater than 5 degrees
+                if(Math.abs(event.alpha-oldValue) > 5) {
+                    map.setBearing(event.alpha);
+                    oldValue = event.alpha
+                }
                 // after 2000ns allow to rotate the map again
                 $timeout(function() {blocked=false}, 2000);
             }
