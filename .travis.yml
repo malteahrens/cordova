@@ -33,6 +33,7 @@ script:
   - cordova plugin add https://github.com/parsonsmatt/WifiWizard.git
   # install webserver and patch to support CORS
   - cordova plugin add https://github.com/malteahrens/cordova-httpd.git
+  - cordova plugin add cordova-sqlite-storage
   #- cordova plugin add https://github.com/floatinghotpot/cordova-httpd.git
   #- patch plugins/com.rjfun.cordova.httpd/src/android/NanoHTTPD.java  < dev/patches/patchHttpd.txt
   - grunt build

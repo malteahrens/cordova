@@ -1,7 +1,14 @@
 <ion-view cache-view="false" view-title="Experiments">
     <ion-content class="padding">
-        <div id="location">location</div>
-        <div id="url">url</div>
-        <div id="localpath">localpath</div>
+        <button class="button button-full button-positive" ng-click="clearDb()">
+            Clear Database
+        </button>
+        <button class="button button-full button-positive" ng-click="insertRow()">
+            Insert Row
+        </button>
+
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="row in results" type="item-text-wrap">
+            <p>{{row.data}}</p>
+        </ion-item>
     </ion-content>
 </ion-view>
