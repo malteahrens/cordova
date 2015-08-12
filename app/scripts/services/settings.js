@@ -16,6 +16,7 @@ angular.module('starter')
 
     var map = {
         activateGps: true,
+        recordGps: true,
         followGps: true,
         rotate: true,
         bearing: 0,

@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo) {
+.controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, Sqlite) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
     var map = new mapboxgl.Map({
         container: 'map',
@@ -156,6 +156,11 @@ angular.module('starter')
 
         if(Settings.map.followGps) {
             map.easeTo({ center: location1, duration: 0 });
+        }
+
+        if(Settings.map.recordGps) {
+            var data = [position.coords.latitude, position.coords.longitude]
+            Sqlite.writeLocation(data);
         }
     };
 

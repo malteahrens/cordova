@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
-    .run(function($ionicPlatform, Settings, Server) {
+    .run(function($ionicPlatform, Settings, Server, Sqlite) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -21,6 +21,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             // load settings from localStorage
             Settings.load();
 
+            // open database for storing gps
+            Sqlite.openDb();
+            Sqlite.initDb();
+
             // serve assets via server
             var corHttpd = cordova.plugins.CorHttpd;
             Server.init(corHttpd);
@@ -31,6 +35,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 Server.startServer();
             }
             Settings.observer(restartServer);
+
         });
     })
 

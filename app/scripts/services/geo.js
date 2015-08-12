@@ -1,11 +1,11 @@
 angular.module('starter')
-.factory('Geo', ['$q', function($q){
+.factory('Geo', ['$q', 'Settings', 'Debug', function($q, Settings, Debug){
     this_ = this
     this_.watchId = 333;
     var startWatch = function(onSuccess, onError, options){
         var q = $q.defer();
         this_.watchId = navigator.geolocation.watchPosition(function (position) {
-            onSuccess(position)
+            onSuccess(position);
             q.resolve();
         }, function (error) {
             q.reject(error)

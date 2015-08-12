@@ -1,14 +1,11 @@
 <ion-view cache-view="false" view-title="Experiments">
     <ion-content class="padding">
-        <button class="button button-full button-positive" ng-click="clearDb()">
-            Clear Database
+        <button class="button button-full button-positive" ng-click="getResults()">
+            Get Results
         </button>
-        <button class="button button-full button-positive" ng-click="insertRow()">
-            Insert Row
-        </button>
-
+        <p>Number of entries: {{resultsCount}}</p>
         <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="row in results" type="item-text-wrap">
-            <p>{{row.data}}</p>
+            <p>{{row.lat}}</p>
         </ion-item>
     </ion-content>
 </ion-view>

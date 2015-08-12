@@ -3,6 +3,7 @@ angular.module('starter')
     $scope.settings = {
         map: {
             activateGps: Settings.map.activateGps,
+            recordGps: Settings.map.recordGps,
             followGps: Settings.map.followGps,
             rotate: Settings.map.rotate,
             bearing: Settings.map.bearing,
@@ -14,6 +15,14 @@ angular.module('starter')
         if(oldVal !== newVal) {
             console.log("activateGps set to: " + newVal);
             $scope.settings.map.activateGps = newVal;
+            Settings.save($scope.settings.map);
+        }
+    });
+
+    $scope.$watch('settings.map.recordGps', function (newVal, oldVal) {
+        if(oldVal !== newVal) {
+            console.log("recordGps set to: " + newVal);
+            $scope.settings.map.recordGps = newVal;
             Settings.save($scope.settings.map);
         }
     });
