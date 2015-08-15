@@ -1,19 +1,6 @@
 angular.module('starter')
 .factory('Settings', function(Debug) {
     var observerCallbacks = [];
-
-    //register an observer
-    var registerObserverCallback = function(callback){
-        console.log("notify observer")
-        observerCallbacks.push(callback);
-    };
-
-    var notifyObservers = function(){
-        angular.forEach(observerCallbacks, function(callback){
-            callback();
-        });
-    };
-
     var map = {
         activateGps: true,
         recordGps: true,
@@ -21,6 +8,23 @@ angular.module('starter')
         rotate: true,
         bearing: 0,
         server: false
+    };
+
+    //register an observer
+    var registerObserverCallback = function(callback) {
+        console.log("added observer")
+        observerCallbacks.push(callback);
+    };
+
+    var notifyObservers = function(settingChanged) {
+        console.log(observerCallbacks.size);
+        angular.forEach(observerCallbacks, function(callback){
+            var watchSetting = callback.watchSetting;
+            if(watchSetting != undefined && settingChanged === watchSetting) {
+                console.log("notify "+settingChanged+" observer, settings changed to "+map[watchSetting]);
+                callback.notify(map[watchSetting]);
+            }
+        });
     };
 
     var check = function(setting, func) {
@@ -31,12 +35,17 @@ angular.module('starter')
         }
     }
 
-    var save = function(map) {
-        this.map = map;
+    var save = function(settings) {
+        var settingChanged = "";
+        // find changed setting
+        for (var setting in settings) {
+            if(settings[setting] !== map[setting]) {
+                settingChanged = setting;
+                map[setting] = settings[setting];
+            }
+        }
         window.localStorage['settings'] = JSON.stringify(map);
-        console.log("save config...");
-        Debug.trace(map);
-        notifyObservers();
+        notifyObservers(settingChanged);
     };
 
     // will be triggered when $ionicPlatform.ready in app.js

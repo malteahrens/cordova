@@ -57,6 +57,14 @@
     "com.pylonproducts.wifiwizard",
     "org.apache.cordova.console",
     "org.apache.cordova.device",
+    "com.ionic.keyboard",
+    "com.pylonproducts.wifiwizard",
+    "com.pylonproducts.wifiwizard",
+    "org.apache.cordova.console",
+    "org.apache.cordova.console",
+    "org.apache.cordova.device",
+    "com.ionic.keyboard",
     "com.ionic.keyboard"
-  ]
+  ],
+  "cordovaPlatforms": []
 }

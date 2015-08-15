@@ -183,10 +183,11 @@ angular.module('starter')
 
     $scope.$on('$ionicView.enter', function () {
         if (Settings.map.activateGps) {
-            Geo.startWatch(onSuccess, onError, options);
+            //Geo.startWatch(onSuccess, onError, options);
+            //Geo.startBackgroundGeoloc()
             Debug.trace("gps is enabled");
         } else {
-            Geo.stopWatch();
+            //Geo.stopWatch();
             Debug.trace("gps is disable");
         }
         if (Settings.map.bearing) {

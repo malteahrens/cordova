@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
-    .run(function($ionicPlatform, Settings, Server, Sqlite) {
+    .run(function($ionicPlatform, Settings, Server, Sqlite, Geo) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -25,14 +25,31 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             Sqlite.openDb();
             Sqlite.initDb();
 
+            // GPS
+            var settingsChange = {
+                notify: function(setting) {
+                    if (setting) {
+                        Geo.startBackgroundGeoloc();
+                    } else {
+                        Geo.stopBackgroundGeoloc();
+                    }
+                },
+                watchSetting: "activateGps"
+            }
+            Settings.observer(settingsChange);
+            settingsChange.notify(Settings.map.activateGps)
+
             // serve assets via server
             var corHttpd = cordova.plugins.CorHttpd;
             Server.init(corHttpd);
             Server.startServer();
 
-            var restartServer = function() {
-                Server.stopServer();
-                Server.startServer();
+            var restartServer = {
+                notify: function() {
+                    Server.stopServer();
+                    Server.startServer();
+                },
+                watchSetting: "server"
             }
             Settings.observer(restartServer);
 

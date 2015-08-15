@@ -8,7 +8,7 @@ angular.module('starter')
                 db1 = $cordovaSQLite.openDB("myapp.db");
             } else {
                 Debug.trace("open database with browser");
-                db1 = $window.openDatabase("myapp.db", "1.0", "My app", -1);
+                db1 = window.openDatabase("myapp.db", "1.0", "My app", -1);
             }
         };
 
