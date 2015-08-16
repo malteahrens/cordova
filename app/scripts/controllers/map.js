@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, Sqlite) {
+.controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, Sqlite, Layers) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
     var map = new mapboxgl.Map({
         container: 'map',
@@ -12,12 +12,23 @@ angular.module('starter')
     });
     map.addControl(new mapboxgl.Navigation());
     map.setPitch(Settings.map.bearing);
+    $scope.statusLed = "yellow";
+
+   $scope.statusToggle = function() {
+       if($scope.statusLed === "yellow") {
+           $scope.statusLed = "red";
+       } else {
+           $scope.statusLed = "yellow";
+       }
+       $scope.$apply();
+   }
 
     map.on('load', function(e) {
         Debug.trace("Map loaded");
         $scope.addGeojsonLayer({'name':'locationAccuracy'});
         $scope.addGeojsonLayer({'name':'locationHeading'});
         $scope.addGeojsonLayer({'name':'location'});
+        $scope.addGeojsonLayer({'name':'gpsTrace'});
     });
 
     // access the device compass sensor
@@ -88,6 +99,16 @@ angular.module('starter')
                     "line-color": "#ff0000",
                     "line-width": 2
                 }
+            },
+            "gpsTrace": {
+                "type": 'line',
+                "layout": {
+                    "visibility": visibility
+                },
+                "paint": {
+                    "line-color": "#ff0000",
+                    "line-width": 2
+                }
             }
         }
         data = [0, 0]
@@ -105,6 +126,18 @@ angular.module('starter')
         });
         Debug.trace("layer added: "+layer.name);
         $scope.$apply();
+    }
+
+    $scope.setLineData = function(layerId, data) {
+        var data = Layers.getData()
+        var layer = map.getSource('gpsTrace');
+        if(data !== undefined) {
+            layer.setData(data);
+        } else {
+            console.log("couldn't draw gpsTrace, data is empty");
+        }
+
+
     }
 
     $scope.setBufferData = function(layerId, data, radius) {
@@ -162,6 +195,10 @@ angular.module('starter')
             var data = [position.coords.latitude, position.coords.longitude]
             Sqlite.writeLocation(data);
         }
+
+        $scope.statusToggle();
+        Layers.pushData([position.coords.longitude, position.coords.latitude]);
+        $scope.setLineData();
     };
 
     function onError(error) {
@@ -181,15 +218,10 @@ angular.module('starter')
         }
     };
 
+    Geo.configure(onSuccess, onError, options);
+
     $scope.$on('$ionicView.enter', function () {
-        if (Settings.map.activateGps) {
-            //Geo.startWatch(onSuccess, onError, options);
-            //Geo.startBackgroundGeoloc()
-            Debug.trace("gps is enabled");
-        } else {
-            //Geo.stopWatch();
-            Debug.trace("gps is disable");
-        }
+
         if (Settings.map.bearing) {
             Debug.trace("setting bearing to: " + Settings.map.bearing);
             map.setPitch(Settings.map.bearing);

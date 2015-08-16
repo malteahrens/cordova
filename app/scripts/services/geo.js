@@ -5,7 +5,6 @@ angular.module('starter')
     var startWatch = function(onSuccess, onError, options){
         var q = $q.defer();
         this_.watchId = navigator.geolocation.watchPosition(function (position) {
-            Debug.trace("got gps position");
             onSuccess(position);
             q.resolve();
         }, function (error) {
@@ -21,7 +20,6 @@ angular.module('starter')
         }
     }
     var startBackgroundGeoloc = function() {
-        Debug.trace("start gps")
         var options = {
             desiredAccuracy: 10,
             stationaryRadius: 20,
@@ -54,10 +52,33 @@ angular.module('starter')
         $cordovaBackgroundGeolocation.stop();
     }
 
+    var startGps = function() {
+        if(this.options !== undefined) {
+            startWatch(this.onSuccess, this.onError, this.options);
+        } else {
+            Debug.trace("couldn't start gps");
+        }
+
+    }
+
+    var stopGps = function() {
+        stopWatch();
+    }
+
+    var onSuccess;
+    var onError;
+    var options;
+    var configure = function(onSuccess, onError, options) {
+        this.onSuccess = onSuccess;
+        this.onError = onError;
+        this.options = options;
+    }
+
     return {
-        startWatch: startWatch,
-        stopWatch: stopWatch,
         startBackgroundGeoloc: startBackgroundGeoloc,
-        stopBackgroundGeoloc: stopBackgroundGeoloc
+        stopBackgroundGeoloc: stopBackgroundGeoloc,
+        startGps: startGps,
+        stopGps: stopGps,
+        configure: configure
     }
 }])

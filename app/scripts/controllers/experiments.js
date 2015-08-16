@@ -1,13 +1,13 @@
 angular.module('starter.controllers', [])
-.controller('ExperimentsCtrl', function ($scope, Sqlite) {
-        $scope.$watch('results', function (newVal, oldVal) {
-            if(oldVal !== newVal) {
-                console.log("results changed");
-            }
-        });
+.controller('ExperimentsCtrl', function ($scope, Sqlite, Layers) {
+        $scope.results = [];
+        $scope.resultsCount = 0;
 
         $scope.getResults = function() {
-            $scope.results = Sqlite.getResults();
-            $scope.resultsCount = $scope.results.length;
+            $scope.results = Sqlite.getResults().then(function(results){
+                $scope.results = results;
+                Layers.gpsTrace(results);
+                $scope.resultsCount = $scope.results.length;
+            });
         }
 })

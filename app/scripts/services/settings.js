@@ -16,13 +16,13 @@ angular.module('starter')
         observerCallbacks.push(callback);
     };
 
-    var notifyObservers = function(settingChanged) {
+    var notifyObservers = function(settingChanged, settings) {
         console.log(observerCallbacks.size);
         angular.forEach(observerCallbacks, function(callback){
             var watchSetting = callback.watchSetting;
             if(watchSetting != undefined && settingChanged === watchSetting) {
-                console.log("notify "+settingChanged+" observer, settings changed to "+map[watchSetting]);
-                callback.notify(map[watchSetting]);
+                console.log("notify "+settingChanged+" observer, settings changed to "+settings[watchSetting]);
+                callback.notify(settings[watchSetting]);
             }
         });
     };
@@ -36,16 +36,17 @@ angular.module('starter')
     }
 
     var save = function(settings) {
+        console.log(settings.activateGps);
         var settingChanged = "";
         // find changed setting
         for (var setting in settings) {
-            if(settings[setting] !== map[setting]) {
+            if(settings[setting] !== this.map[setting]) {
                 settingChanged = setting;
-                map[setting] = settings[setting];
+                this.map[settingChanged] = settings[settingChanged];
             }
         }
         window.localStorage['settings'] = JSON.stringify(map);
-        notifyObservers(settingChanged);
+        notifyObservers(settingChanged, settings);
     };
 
     // will be triggered when $ionicPlatform.ready in app.js

@@ -30,8 +30,11 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 notify: function(setting) {
                     if (setting) {
                         Geo.startBackgroundGeoloc();
+                        Geo.startGps();
                     } else {
                         Geo.stopBackgroundGeoloc();
+                        Geo.stopGps();
+                        console.log("got notification to stop gps background");
                     }
                 },
                 watchSetting: "activateGps"

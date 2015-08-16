@@ -1,5 +1,5 @@
 angular.module('starter')
-    .factory('Sqlite', function($cordovaSQLite, $window, Debug, $cordovaSQLite) {
+    .factory('Sqlite', function($cordovaSQLite, $window, $q, Debug, $cordovaSQLite, Layers) {
         var db1;
 
         openDb = function() {
@@ -13,12 +13,10 @@ angular.module('starter')
         };
 
         writeLocation = function(data) {
-            console.log(data[1]);
             var d = new Date();
             var data = ['location', 1, data[0], data[1], 1, 2.0, d.getTime()];
             var query = 'INSERT INTO location (bssid, level, lat, lon, altitude, accuracy, time) VALUES (?,?,?,?,?,?,?)';
             $cordovaSQLite.execute(db1, query, data);
-            Debug.trace("would write location to database")
         }
 
         initDb = function() {
@@ -55,22 +53,25 @@ angular.module('starter')
 
         var getResults = function() {
             var results = [];
+            var deferred = $q.defer();
+
             var query = 'SELECT * FROM location';
             $cordovaSQLite.execute(db1, query).then(function(res) {
                 if(res.rows.length > 0) {
                     for (var i = 0; i < res.rows.length; i++) {
-                        console.log("Row "+i+": "+res.rows.item(i).lat);
+                        //console.log("Row "+i+": "+res.rows.item(i).lat);
                         results.push(res.rows.item(i));
                     }
-
+                    deferred.resolve(results);
                 } else {
-                    console.log("No results found");
+                    deferred.reject("No results found");
                 }
             }, function (err) {
                 console.error(JSON.stringify(err));
             });
 
-            return results;
+
+            return deferred.promise;
         }
 
         return {
