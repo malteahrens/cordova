@@ -64,7 +64,33 @@
     "org.apache.cordova.console",
     "org.apache.cordova.device",
     "com.ionic.keyboard",
+    "com.ionic.keyboard",
+    "org.apache.cordova.device",
+    "org.apache.cordova.device",
+    "org.apache.cordova.device",
+    "com.pylonproducts.wifiwizard",
+    "org.apache.cordova.console",
+    "org.apache.cordova.console",
+    "com.pylonproducts.wifiwizard",
+    "com.pylonproducts.wifiwizard",
+    "com.ionic.keyboard",
+    "com.ionic.keyboard",
+    "org.apache.cordova.device",
+    "com.pylonproducts.wifiwizard",
+    "org.apache.cordova.console",
+    "com.pylonproducts.wifiwizard",
+    "com.pylonproducts.wifiwizard",
+    "org.apache.cordova.device",
+    "com.pylonproducts.wifiwizard",
+    "com.pylonproducts.wifiwizard",
+    "org.apache.cordova.device",
+    "com.pylonproducts.wifiwizard",
+    "org.apache.cordova.console",
+    "com.ionic.keyboard",
+    "com.ionic.keyboard",
     "com.ionic.keyboard"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "android"
+  ]
 }

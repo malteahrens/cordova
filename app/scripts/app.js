@@ -23,6 +23,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
             // open database for storing gps
             Sqlite.openDb();
+            Sqlite.openGeoDb();
             Sqlite.initDb();
 
             // GPS
@@ -33,7 +34,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                         Geo.startGps();
                     } else {
                         Geo.stopBackgroundGeoloc();
-                        Geo.stopGps();
+                        Geo.startGps();
                         console.log("got notification to stop gps background");
                     }
                 },
@@ -55,7 +56,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 watchSetting: "server"
             }
             Settings.observer(restartServer);
-
         });
     })
 

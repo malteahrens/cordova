@@ -36,6 +36,8 @@ script:
   - cordova plugin add https://github.com/malteahrens/cordova-httpd.git
   - cordova plugin add cordova-sqlite-storage
   - cordova plugin add cordova-plugin-background-geolocation
+  #- cordova plugin add cordova-plugin-device-orientation
+
   #- cordova plugin add https://github.com/floatinghotpot/cordova-httpd.git
   #- patch plugins/com.rjfun.cordova.httpd/src/android/NanoHTTPD.java  < dev/patches/patchHttpd.txt
   - grunt build

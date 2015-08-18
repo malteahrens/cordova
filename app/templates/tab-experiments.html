@@ -3,6 +3,23 @@
         <button class="button button-full button-positive" ng-click="getResults()">
             Get Results
         </button>
+        <button class="button button-full button-positive" ng-click="saveAsGeojson()">
+            Init geo db
+        </button>
+        <button class="button button-full button-positive" ng-click="saveGeoJson()">
+            Save GeoJson
+        </button>
+        <button class="button button-full button-positive" ng-click="getGeoJson()">
+            Get GeoJson
+        </button>
         <p>Number of entries: {{resultsCount}}</p>
+        <ion-list>
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="geojson in geojsonRecords" type="item-text-wrap">
+                <div ng-click="showGeojson(geojson)">
+                    <h2>{{geojson.time}}</h2>
+                    <i class="icon ion-chevron-right icon-accessory"></i>
+                </div>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

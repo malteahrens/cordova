@@ -1,6 +1,6 @@
 angular.module('starter')
 .factory('Settings', function(Debug) {
-    var observerCallbacks = [];
+
     var map = {
         activateGps: true,
         recordGps: true,
@@ -10,6 +10,7 @@ angular.module('starter')
         server: false
     };
 
+    var observerCallbacks = [];
     //register an observer
     var registerObserverCallback = function(callback) {
         console.log("added observer")
@@ -17,7 +18,6 @@ angular.module('starter')
     };
 
     var notifyObservers = function(settingChanged, settings) {
-        console.log(observerCallbacks.size);
         angular.forEach(observerCallbacks, function(callback){
             var watchSetting = callback.watchSetting;
             if(watchSetting != undefined && settingChanged === watchSetting) {
@@ -36,13 +36,13 @@ angular.module('starter')
     }
 
     var save = function(settings) {
-        console.log(settings.activateGps);
         var settingChanged = "";
         // find changed setting
         for (var setting in settings) {
             if(settings[setting] !== this.map[setting]) {
                 settingChanged = setting;
                 this.map[settingChanged] = settings[settingChanged];
+                console.log("Setting changed: "+settingChanged);
             }
         }
         window.localStorage['settings'] = JSON.stringify(map);

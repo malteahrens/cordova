@@ -1,5 +1,25 @@
 angular.module('starter')
     .factory('Layers', ['$q', 'Settings', 'Debug', '$cordovaBackgroundGeolocation', function($q, Settings, Debug) {
+        var observerCallbacks = [];
+        //register an observer
+        var registerObserverCallback = function(callback) {
+            observerCallbacks.push(callback);
+        };
+
+        var notifyObservers = function() {
+            angular.forEach(observerCallbacks, function(callback){
+                var layerId = callback.watch;
+                callback.notify(layerId, layer[layerId]);
+            });
+        };
+        var layer = {
+            'gpsStorage': null
+        }
+        var setLayerData = function(layerId, data) {
+            layer[layerId] = data;
+            notifyObservers();
+        }
+
         var linestring = [];
         var geojson;
         var gpsTrace = function(entries) {
@@ -21,6 +41,8 @@ angular.module('starter')
         return {
             gpsTrace: gpsTrace,
             getData: getData,
-            pushData: pushData
+            pushData: pushData,
+            observer: registerObserverCallback,
+            setLayerData: setLayerData
         }
     }])
