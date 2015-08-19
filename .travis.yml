@@ -28,7 +28,6 @@ script:
   - ionic browser list
   # ionic browser add crosswalk@12.41.296.5 -> results in 24MB apk and 65MB installed app
   - ionic browser add crosswalk@12.41.296.5
-  - ionic platform add android
   - ionic resources --splash
   - cordova plugin add cordova-plugin-geolocation
   - cordova plugin add https://github.com/parsonsmatt/WifiWizard.git
@@ -36,16 +35,13 @@ script:
   - cordova plugin add https://github.com/malteahrens/cordova-httpd.git
   - cordova plugin add cordova-sqlite-storage
   - cordova plugin add cordova-plugin-background-geolocation
-  #- cordova plugin add cordova-plugin-device-orientation
-
+  - cordova plugin add cordova-plugin-device-orientation
   #- cordova plugin add https://github.com/floatinghotpot/cordova-httpd.git
   #- patch plugins/com.rjfun.cordova.httpd/src/android/NanoHTTPD.java  < dev/patches/patchHttpd.txt
   - grunt build
   - ls platforms/android/build/outputs/apk/
   #- "/bin/cp /home/travis/build/malteahrens/cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk" 
-  - "/bin/cp platforms/android/build/outputs/apk/android-debug.apk dev/android-debug.apk"
-  - git add dev/android-debug.apk
-  - git commit -m "init"
+  - "/bin/cp platforms/android/build/outputs/apk/android-armv7-debug.apk dev/android-armv7-debug.apk"
   #- "/bin/cp platforms/android/ant-build/CordovaApp-debug.apk dev/CordovaApp-debug.apk"
   - sh ./dev/scripts/github.sh
  
