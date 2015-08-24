@@ -1,5 +1,5 @@
 angular.module('starter')
-    .controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, Sqlite, Layers) {
+    .controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, GeoOperations, Sqlite, Layers) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -239,8 +239,33 @@ angular.module('starter')
                     break;
             }
         };
-
         Geo.configure(onSuccess, onError, options);
+
+        var fullscreenCb = function() {
+            console.log("got fullscreen ready event");
+            $timeout(function() {
+                map.resize();
+                map.render();
+                var elem = map.getCanvas();
+                console.log(elem);
+                console.log("resize called");
+            }, 3000);
+
+        }
+        document.addEventListener('webkitfullscreenchange',fullscreenCb);
+        $scope.fullscreen = function() {
+            // full-screen available?
+            var elem = map.getCanvas();
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            }
+        }
 
         $scope.$on('$ionicView.enter', function () {
             if (!Settings.map.rotate) {

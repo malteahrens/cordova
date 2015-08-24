@@ -26,23 +26,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             Sqlite.openGeoDb();
             Sqlite.initDb();
 
-            // GPS
-            var settingsChange = {
-                notify: function(setting) {
-                    if (setting) {
-                        Geo.startBackgroundGeoloc();
-                        Geo.startGps();
-                    } else {
-                        Geo.stopBackgroundGeoloc();
-                        Geo.startGps();
-                        console.log("got notification to stop gps background");
-                    }
-                },
-                watchSetting: "activateGps"
-            }
-            Settings.observer(settingsChange);
-            settingsChange.notify(Settings.map.activateGps)
-
             // serve assets via server
             var corHttpd = cordova.plugins.CorHttpd;
             Server.init(corHttpd);
@@ -56,6 +39,41 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 watchSetting: "server"
             }
             Settings.observer(restartServer);
+
+            // GPS
+            var settingsChange = {
+                notify: function(setting) {
+                    if (setting) {
+                        Geo.startBackgroundGeoloc();
+                        Geo.startGps();
+                    } else {
+                        Geo.stopBackgroundGeoloc();
+                        Geo.stopGps();
+                        console.log("got notification to stop gps background");
+                    }
+                },
+                watchSetting: "activateGps"
+            }
+            Settings.observer(settingsChange);
+            settingsChange.notify(Settings.map.activateGps);
+
+            volumedownCallback = function() {
+                console.log("Volume down pressed");
+            }
+            volumeupCallback = function() {
+                console.log("Volume up pressed");
+            }
+            resumeCallback = function() {
+                console.log("welcome back from resume")
+            }
+            backgroundCallback = function() {
+                console.log("app is in background")
+            }
+            document.addEventListener('resume',resumeCallback);
+            document.addEventListener("pause", backgroundCallback, false);
+
+            document.addEventListener("volumedownbutton", volumedownCallback, false);
+            document.addEventListener("volumeupbutton", volumeupCallback, false);
         });
     })
 

@@ -20,6 +20,7 @@ angular.module('starter')
         }
     }
     var startBackgroundGeoloc = function() {
+        Debug.trace("start gps")
         var options = {
             desiredAccuracy: 10,
             stationaryRadius: 20,
@@ -55,6 +56,7 @@ angular.module('starter')
     var startGps = function() {
         if(this.options !== undefined) {
             startWatch(this.onSuccess, this.onError, this.options);
+            Debug.trace("started gps, configuration okay")
         } else {
             Debug.trace("couldn't start gps");
         }
@@ -75,6 +77,7 @@ angular.module('starter')
     }
 
     return {
+
         startBackgroundGeoloc: startBackgroundGeoloc,
         stopBackgroundGeoloc: stopBackgroundGeoloc,
         startGps: startGps,
