@@ -7,7 +7,9 @@ angular.module('starter')
             followGps: Settings.map.followGps,
             rotate: Settings.map.rotate,
             bearing: Settings.map.bearing,
-            server: Settings.map.server
+            server: Settings.map.server,
+            automaticZoom: Settings.map.automaticZoom,
+            navigationMode: Settings.map.navigationMode
         }
     };
 
@@ -42,6 +44,20 @@ angular.module('starter')
     $scope.$watch('settings.map.rotate', function (newVal, oldVal) {
         if(oldVal !== newVal) {
             $scope.settings.map.rotate = newVal;
+            Settings.save($scope.settings.map);
+        }
+    });
+
+    $scope.$watch('settings.map.automaticZoom', function (newVal, oldVal) {
+        if(oldVal !== newVal) {
+            $scope.settings.map.automaticZoom = newVal;
+            Settings.save($scope.settings.map);
+        }
+    });
+
+    $scope.$watch('settings.map.navigationMode', function (newVal, oldVal) {
+        if(oldVal !== newVal) {
+            $scope.settings.map.animationMode = newVal;
             Settings.save($scope.settings.map);
         }
     });

@@ -116,6 +116,7 @@ angular.module('starter')
             var query = 'INSERT INTO location (time, json) VALUES (?, ?)';
 
             $cordovaSQLite.execute(databases.geoDb, query, data).then(function (res) {
+                console.log("wrote geojson to db: ")
                 console.log(res);
             }, function (err) {
                 console.log(err);
@@ -133,22 +134,10 @@ angular.module('starter')
             return deferred.promise;
         }
 
-        var getLogResults = function() {
-            var query = 'SELECT * FROM location';
-            var deferred = $q.defer();
-            getResults(databases.db1, query).then(function(results) {
-                deferred.resolve(results);
-            }, function(err) {
-                deferred.reject(err);
-            });
-            return deferred.promise;
-        }
-
         return {
             initDb: initDb,
             openDb: openDb,
             openGeoDb: openGeoDb,
-            getLogResults: getLogResults,
             writeLocation: writeLocation,
             initGeoDb: initGeoDb,
             getGeoJson: getGeoJson,

@@ -1,16 +1,8 @@
 angular.module('starter.controllers', [])
-.controller('ExperimentsCtrl', function ($scope, Sqlite, Layers, GeoOperations) {
+.controller('ExperimentsCtrl', function ($scope, Sqlite, Layers, GeoOperations, Debug) {
         $scope.results = [];
         $scope.resultsCount = 0;
         $scope.geojsonRecords = [];
-
-        $scope.getResults = function() {
-            $scope.results = Sqlite.getLogResults().then(function(results){
-                $scope.results = results;
-                Layers.gpsTrace(results);
-                $scope.resultsCount = $scope.results.length;
-            });
-        }
 
         $scope.saveAsGeojson = function() {
             Sqlite.initGeoDb();
@@ -19,12 +11,7 @@ angular.module('starter.controllers', [])
         $scope.saveGeoJson = function() {
             var geojson = Layers.getData();
             Sqlite.saveGeoJson(geojson);
-            var bbox = GeoOperations.distance(geojson);
             var lineLength = GeoOperations.lineLength(geojson);
-            Debug.trace("bbox of geojson: ");
-            Debug.trace(bbox);
-            Debug.trace("lineLength: ");
-            Debug.trace(lineLength);
         }
 
         $scope.getGeoJson = function() {
@@ -32,10 +19,6 @@ angular.module('starter.controllers', [])
             Sqlite.getGeoJson().then(function (res) {
                 $scope.geojsonRecords = res;
                 $scope.resultsCount = res.length;
-                Debug.trace("bbox: ");
-                Debug.trace(bbox);
-                Debug.trace("length: ");
-                Debug.trace(lineLength);
             }, function (err) {
                 console.log(err);
             });

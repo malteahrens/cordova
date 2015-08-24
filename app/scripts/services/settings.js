@@ -5,9 +5,11 @@ angular.module('starter')
         activateGps: true,
         recordGps: true,
         followGps: true,
-        rotate: true,
-        bearing: 0,
-        server: false
+        rotate: false,
+        bearing: 90,
+        server: false,
+        automaticZoom: true,
+        navigationMode: false
     };
 
     var observerCallbacks = [];

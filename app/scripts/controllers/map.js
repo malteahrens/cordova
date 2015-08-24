@@ -26,6 +26,8 @@ angular.module('starter')
         var layerDataChange = {
             notify: function(layerId, data) {
                 $scope.setLineData(layerId, data);
+                var bbox = GeoOperations.bbox(data);
+                Debug.trace(bbox);
             },
             watch: "gpsStorage"
         }
@@ -33,8 +35,8 @@ angular.module('starter')
 
         map.on('load', function(e) {
             Debug.trace("Map loaded");
-            var mapCanvasContainer = map.getCanvasContainer();
-            console.log(mapCanvasContainer);
+            //var mapCanvasContainer = map.getCanvasContainer();
+            //console.log(mapCanvasContainer);
             $scope.addGeojsonLayer({'name':'locationAccuracy'});
             $scope.addGeojsonLayer({'name':'locationHeading'});
             $scope.addGeojsonLayer({'name':'location'});
@@ -153,7 +155,7 @@ angular.module('starter')
         }
 
         $scope.setLineData = function(layerId, data) {
-            Debug.trace("Updated data: "+layerId);
+            //Debug.trace("Updated data: "+layerId);
             var layer = map.getSource(layerId);
             if(data !== undefined && layer !== undefined) {
                 layer.setData(data);
@@ -208,10 +210,26 @@ angular.module('starter')
             var radius = position.coords.accuracy * 0.001
             $scope.setBufferData("locationAccuracy", location2, radius);
 
-
-            if(Settings.map.followGps) {
-                map.easeTo({ center: location1, duration: 0 });
+            var zoomLevel = GeoOperations.speedToZoom(position.coords.speed);
+            if(Settings.map.navigationMode) {
+                map.easeTo({
+                    center: location1,
+                    zoom: zoomLevel,
+                    duration: 0,
+                    pitch: Settings.map.bearing
+                });
             }
+            else {
+                if(Settings.map.followGps) {
+                    map.easeTo({ center: location1, duration: 0 });
+                }
+
+                if(Settings.map.automaticZoom) {
+                    console.log("speed: "+position.coords.speed+", zoomLevel: "+zoomLevel);
+                    map.zoomTo(zoomLevel);
+                }
+            }
+
 
             if(Settings.map.recordGps) {
                 var data = [position.coords.latitude, position.coords.longitude]
