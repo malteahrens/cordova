@@ -8,7 +8,7 @@ angular.module('starter')
         rotate: false,
         bearing: 90,
         server: false,
-        automaticZoom: true,
+        automaticZoom: false,
         navigationMode: false
     };
 

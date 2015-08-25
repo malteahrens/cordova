@@ -1,5 +1,5 @@
-<ion-view cache-view="false" view-title="Experiments">
-    <ion-content>
+<ion-view cache-view="false" view-title="Layers">
+    <ion-content class="padding">
         <button class="button button-full button-positive" ng-click="initGeoDb()">
             Init geo db
         </button>
@@ -8,9 +8,9 @@
         </button>
         <p>Number of entries: {{resultsCount}}</p>
         <ion-list>
-            <ion-item class="item-remove-animate item-icon-right" ng-repeat="geojson in geojsonRecords" type="item-text-wrap">
-                <div ng-click="showGeojson(geojson)">
-                    <h2>{{geojson.time}}</h2>
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="geojson in geojsonRecords | orderBy:length" type="item-text-wrap" href="#/geojson/{{geojson.time}}">
+                <div>
+                    <h2>{{geojson.time| date:'MM/dd/yyyy @ HH:mm'}}</h2><p>{{geojson.length}} meters</p>
                     <i class="icon ion-chevron-right icon-accessory"></i>
                 </div>
             </ion-item>

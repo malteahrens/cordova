@@ -1,5 +1,5 @@
 angular.module('starter')
-    .factory('Sqlite', function($cordovaSQLite, $window, $q, Debug, $cordovaSQLite, Layers) {
+    .factory('Sqlite', function($cordovaSQLite, $window, $q, Debug, $cordovaSQLite, Layers, GeoOperations) {
 
         var databases = {
             db1: null,
@@ -99,7 +99,10 @@ angular.module('starter')
             var createLocation = 'CREATE TABLE `location` (  \
 	                             `_id`	integer PRIMARY KEY AUTOINCREMENT,  \
 	                             `json`	text NOT NULL, \
-	                             `time`	long NOT NULL );'
+	                             `time`	long NOT NULL,\
+	                             `length` double, \
+                                 `description` text \
+                                 );'
 
             $cordovaSQLite.execute(databases.geoDb, 'DROP TABLE IF EXISTS location');
             $cordovaSQLite.execute(databases.geoDb, createLocation);
@@ -110,10 +113,14 @@ angular.module('starter')
             //console.log(geojson.geometry.coordinates.length);
             console.log("insert geojson")
             var jsonString = escape(JSON.stringify(geojson));
+            // line length is in kilometers - calculate meters
+            var lineLength = GeoOperations.lineLength(geojson)*1000;
+            var lineLengthRounded = Number(lineLength.toFixed(1));
+            console.log(lineLengthRounded);
 
             var d = new Date();
-            var data = [d.getTime(), jsonString];
-            var query = 'INSERT INTO location (time, json) VALUES (?, ?)';
+            var data = [d.getTime(), jsonString, lineLengthRounded];
+            var query = 'INSERT INTO location (time, json, length) VALUES (?, ?, ?)';
 
             $cordovaSQLite.execute(databases.geoDb, query, data).then(function (res) {
                 console.log("wrote geojson to db: ")
@@ -123,8 +130,12 @@ angular.module('starter')
             });
         }
 
-        var getGeoJson = function() {
+        var getGeoJson = function(timeStamp) {
             var query = 'SELECT * FROM location';
+            if(timeStamp != undefined) {
+                var query = 'SELECT * FROM location WHERE time='+timeStamp+'';
+            }
+
             var deferred = $q.defer();
             getResults(databases.geoDb, query).then(function(results) {
                 deferred.resolve(results);

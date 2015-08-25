@@ -1,0 +1,11 @@
+<ion-nav-view animation="slide-left-right" view-title="{{title}}">
+    <ion-content class="padding">
+        <button class="button button-full button-positive" ng-click="showOnMap(geojsonRecords[0].json)">
+            Show on map
+        </button>
+        <p>TimeStamp (used as id): {{geojsonRecords[0].time}}</p>
+        <p>Line Length |meters| : {{geojsonRecords[0].length}}</p>
+        <p>Description:  {{geojsonRecords[0].description}}</p>
+        <p>GeoJson: {{geojsonRecords[0].json}}</p>
+    </ion-content>
+</ion-nav-view>

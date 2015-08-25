@@ -4,7 +4,7 @@ angular.module('starter')
         console.log("Geo Operations");
         var geoJsonLine = turf.lineDistance(geojson, "kilometers");
 
-        return lineLength;
+        return geoJsonLine;
     }
 
     var bbox = function(map) {
@@ -22,7 +22,10 @@ angular.module('starter')
     }
 
     var speedToZoom = function getZoomLevel(speed) {
-        var zoomLevel = 16 - speed;
+        var zoomLevel = 17 - speed;
+        if(speed > 12) {
+            zoomLevel = 8;
+        }
         return zoomLevel;
     }
 
