@@ -27,7 +27,7 @@ angular.module('starter')
             notify: function(layerId, data) {
                 $scope.setLineData(layerId, data);
                 var bbox = GeoOperations.getBounds(data);
-                Debug.trace(bbox);
+                map.fitBounds(bbox);
             },
             watch: "gpsStorage"
         }

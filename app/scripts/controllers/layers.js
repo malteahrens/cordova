@@ -44,7 +44,6 @@ angular.module('starter.controllers', [])
         $scope.showOnMap = function(json) {
             console.log("show on map");
             $state.go('tab.map');
-            console.log(json);
             $scope.showGeojson(json);
         }
 

@@ -18,7 +18,9 @@ angular.module('starter')
     }
 
     var getBounds = function(geojson) {
-        return turf.extent(geojson);
+        var turfBounds = turf.extent(geojson);
+        var bounds = [[turfBounds[0], turfBounds[1]],[turfBounds[2],turfBounds[3]]];
+        return bounds;
     }
 
     var speedToZoom = function getZoomLevel(speed) {
