@@ -1,47 +1,22 @@
 <ion-view view-title="Settings">
   <ion-content>
-    <div class="item item-divider">Map</div>
-    <ion-list>
-        <ion-toggle  ng-model="settings.map.activateGps">
-            Enable GPS
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.recordGps">
-            Record GPS position
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.followGps">
-            Follow Location
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.rotate">
-            Rotate Map
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.automaticZoom">
-            Automatic Zoom
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.navigationMode">
-            Navigation Mode
-        </ion-toggle>
-        <label class="item item-input">
-            <div class="row">
-                <div class="col">
-                    <span class="input-label">Map Pitch</span>
-                </div>
-                <div class="col-75 col-offset-25">
-                    <input type="number" ng-model="settings.map.bearing" >
-                </div>
-            </div>
-        </label>
-        <ion-toggle  ng-model="settings.map.server">
-            Server on localhost
-        </ion-toggle>
-    </ion-list>
-    <div class="item item-divider">WLAN</div>
       <ion-list>
-          <ion-toggle  ng-model="settings.enableGpsTracking" ng-change="toggleGps()">
-              Enable WIFI scan
-          </ion-toggle>
-          <ion-toggle  ng-model="settings.enableGpsTracking">
-              xxx
-          </ion-toggle>
+          <div ng-repeat="(key, value) in settings">
+              <ion-item class="item-stable"
+                        ng-click="toggleGroup(key)"
+                        ng-class="{active: isGroupShown(key)}">
+                  <i class="icon" ng-class="isGroupShown(key) ? 'ion-minus' : 'ion-plus'"></i>
+                  &nbsp;
+                  {{key | translate}}
+              </ion-item>
+              <ion-item class="item-accordion"
+                        ng-repeat="(setting, state) in value"
+                        ng-show="isGroupShown(key)">
+                  <ion-toggle ng-model="settings.map[setting]">
+                      {{ setting | translate }}
+                  </ion-toggle>
+              </ion-item>
+          </div>
       </ion-list>
   </ion-content>
 </ion-view>

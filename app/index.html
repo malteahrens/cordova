@@ -27,6 +27,7 @@
     <script src='bower_components/ionic/js/ionic.js'></script>
     <script src='bower_components/ionic/js/ionic-angular.js'></script>
     <script src='bower_components/ngCordova/dist/ng-cordova.js'></script>
+    <script src='bower_components/angular-translate/angular-translate.js'></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -36,6 +37,7 @@
     <!-- your app's js -->
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/filters/filter.js"></script>
     <script src="scripts/controllers/settings.js"></script>
     <script src="scripts/controllers/map.js"></script>
     <script src="scripts/controllers/debug.js"></script>
@@ -58,7 +60,7 @@
     <script src='scripts/libs/mapbox-gl-js-v0.9.0.js'></script>
     <link href='scripts/libs/mapbox-gl-js-v0.9.0.css' rel='stylesheet' />
 </head>
-<body ng-app="starter">
+<body>
 <!--
   The nav bar that will be updated as we navigate between views.
 -->
