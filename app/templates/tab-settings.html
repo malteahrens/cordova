@@ -9,12 +9,11 @@
                   &nbsp;
                   {{key | translate}}
               </ion-item>
+
               <ion-item class="item-accordion"
                         ng-repeat="(setting, state) in value"
                         ng-show="isGroupShown(key)">
-                  <ion-toggle ng-model="settings.map[setting]">
-                      {{ setting | translate }}
-                  </ion-toggle>
+                  <toggle-include></toggle-include>
               </ion-item>
           </div>
       </ion-list>

@@ -6,12 +6,20 @@ angular.element(document).ready(function() {
 
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'pascalprecht.translate'])
 
-    .run(function($ionicPlatform, Settings, Server, Sqlite, Geo, $rootScope) {
-        // This is my preferred Cordova detection method, as it doesn't require updating.
-        // This is a function that bootstraps AngularJS, which is called from later code
-
-
+    .run(function($ionicPlatform, Settings, Server, Sqlite, Geo, $rootScope, $translate) {
         $ionicPlatform.ready(function() {
+            // get locale - this needs the cordova globilization plugin to work
+            if(typeof navigator.globalization !== "undefined") {
+                navigator.globalization.getPreferredLanguage(function(language) {
+                    $translate.use((language.value).split("-")[0]).then(function(data) {
+                        console.log("the app is running on -> " + data + " <- phone");
+                    }, function(error) {
+                        console.log("ERROR -> " + error);
+                    });
+                }, null);
+            } else {
+                console.log("couldn't determine locale");
+            }
 
 
             $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
