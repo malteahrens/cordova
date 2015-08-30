@@ -164,7 +164,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
 
             .state('layers-detail', {
                 url: '/geojson/:layerId',
-                templateUrl: 'templates/geojson-detail.html',
+                templateUrl: 'scripts/components/layer/templates/geojson-detail.html',
                 controller: 'LayersCtrl'
             })
 

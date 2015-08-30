@@ -49,3 +49,13 @@ angular.module("starter")
         }
     }
 })
+.directive("includeMap", function() {
+    return {
+        restrict: "E",
+        template: '<div ng-include="url"></div>',
+        link: function(scope, element, attrs){
+            console.log("load map.html");
+            scope.url = "scripts/components/map/map.hmtl";
+        }
+    }
+})
