@@ -1,42 +1,6 @@
 <ion-view view-title="Settings">
   <ion-content>
-    <div class="item item-divider">Map</div>
-    <ion-list>
-        <ion-toggle  ng-model="settings.map.activateGps">
-            Enable GPS
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.recordGps">
-            Record GPS position
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.followGps">
-            Follow Location
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.rotate">
-            Rotate Map
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.automaticZoom">
-            Automatic Zoom
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.map.navigationMode">
-            Navigation Mode
-        </ion-toggle>
-        <label class="item item-input">
-            <div class="row">
-                <div class="col">
-                    <span class="input-label">Map Pitch</span>
-                </div>
-                <div class="col-75 col-offset-25">
-                    <input type="number" ng-model="settings.map.bearing" >
-                </div>
-            </div>
-        </label>
-        <ion-toggle  ng-model="settings.map.server">
-            Server on localhost
-        </ion-toggle>
-    </ion-list>
-    <div class="item item-divider">WLAN</div>
       <ion-list>
-<<<<<<< HEAD
           <div ng-repeat="(key, value) in settings">
               <ion-item class="item-stable"
                         ng-click="toggleGroup(key)"
@@ -49,17 +13,10 @@
               <ion-item class="item-accordion"
                         ng-repeat="(setting, state) in value"
                         ng-show="isGroupShown(key)">
-                  <toggle-include></toggle-include>
+                  <toggle-include ng-if="typeOf(state)==='boolean'"></toggle-include>
+                  <input-include ng-if="typeOf(state)==='integer'"></input-include>
               </ion-item>
           </div>
-=======
-          <ion-toggle  ng-model="settings.enableGpsTracking" ng-change="toggleGps()">
-              Enable WIFI scan
-          </ion-toggle>
-          <ion-toggle  ng-model="settings.enableGpsTracking">
-              xxx
-          </ion-toggle>
->>>>>>> parent of afcdd6d... settings + translation
       </ion-list>
   </ion-content>
 </ion-view>

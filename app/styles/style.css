@@ -12,3 +12,15 @@
 .scroll-content {
    padding: 0 0 0 0;
 }*/
+
+.item.item-accordion {
+    padding: 0;
+    transition: 0.09s all linear;
+}
+.item.item-accordion.ng-hide {
+    line-height: 0px;
+}
+.item.item-accordion.ng-hide-add,
+.item.item-accordion.ng-hide-remove {
+    display: block !important;
+}

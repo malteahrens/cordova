@@ -27,6 +27,7 @@
     <script src='bower_components/ionic/js/ionic.js'></script>
     <script src='bower_components/ionic/js/ionic-angular.js'></script>
     <script src='bower_components/ngCordova/dist/ng-cordova.js'></script>
+    <script src='bower_components/angular-translate/angular-translate.js'></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -36,12 +37,13 @@
     <!-- your app's js -->
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/settings.js"></script>
-    <script src="scripts/controllers/map.js"></script>
-    <script src="scripts/controllers/debug.js"></script>
-    <script src="scripts/controllers/wlan.js"></script>
-    <script src="scripts/controllers/experiments.js"></script>
-    <script src="scripts/controllers/layers.js"></script>
+    <script src="scripts/filters/filter.js"></script>
+    <script src="scripts/controllers/settingsCtrl.js"></script>
+    <script src="scripts/controllers/mapCtrl.js"></script>
+    <script src="scripts/controllers/debugCtrl.js"></script>
+    <script src="scripts/controllers/wlanCtrl.js"></script>
+    <script src="scripts/controllers/experimentsCtrl.js"></script>
+    <script src="scripts/controllers/layersCtrl.js"></script>
     <script src="scripts/services/debug.js"></script>
     <script src="scripts/services/settings.js"></script>
     <script src="scripts/services/sqlite.js"></script>
@@ -59,7 +61,7 @@
     <script src='scripts/libs/mapbox-gl-js-v0.9.0.js'></script>
     <link href='scripts/libs/mapbox-gl-js-v0.9.0.css' rel='stylesheet' />
 </head>
-<body ng-app="starter">
+<body>
 <!--
   The nav bar that will be updated as we navigate between views.
 -->

@@ -1,5 +1,11 @@
+/**
+ * The goal of the presentation controller is to define a simple model and listen for changes.
+ * As soon as a settings changes, it will save the settings object to the model.
+ * The UI is generated from the settings object. This is a flexible approach to reuse the settings controller.
+ */
+
 angular.module('starter')
-.controller('SettingsCtrl', function ($rootScope, $scope, Settings) {
+.controller('SettingsCtrl', function ($rootScope, $scope, $ionicScrollDelegate, Settings) {
     $scope.settings = {
         map: {
             activateGps: Settings.map.activateGps,
@@ -10,6 +16,9 @@ angular.module('starter')
             server: Settings.map.server,
             automaticZoom: Settings.map.automaticZoom,
             navigationMode: Settings.map.navigationMode
+        },
+        server: {
+            server: Settings.map.server
         }
     };
 
@@ -65,5 +74,40 @@ angular.module('starter')
     window.addEventListener('native.keyboardhide', keyboardHideHandler);
     function keyboardHideHandler(e) {
         Settings.save($scope.settings.map);
+    }
+
+        $scope.keyName = function(group) {
+            var keyName = Object.keys(group)[0]
+            console.log(keyName);
+        }
+
+    $scope.toggleGroup = function(group) {
+        if ($scope.isGroupShown(group)) {
+            $scope.shownGroup = null;
+        } else {
+            $scope.shownGroup = group;
+        }
+        $ionicScrollDelegate.resize();
+    };
+    $scope.isGroupShown = function(group) {
+        return $scope.shownGroup === group;
+    };
+    $scope.typeOf = function(value) {
+        var typeOf = typeof value
+        if(typeOf === 'boolean') {
+            console.log("value is a boolean");
+        }
+        if(typeOf === 'number') {
+            console.log("value is a boolean");
+        }
+        if (typeOf === 'number') {
+            if(value % 1 === 0) {
+                typeOf = 'integer';
+            } else {
+                typeOf = 'float';
+            }
+
+        }
+        return typeOf
     }
 })

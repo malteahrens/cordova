@@ -1,13 +1,11 @@
-// Ionic Starter App
-
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
+// bootstrap angular manually instead of ng-init in body tag
+angular.element(document).ready(function() {
+    angular.bootstrap(document, ['starter']);
+});
 
-<<<<<<< HEAD
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'pascalprecht.translate'])
+
     .run(function($ionicPlatform, Settings, Server, Sqlite, Geo, $rootScope, $translate) {
         $ionicPlatform.ready(function() {
             // get locale - this needs the cordova globilization plugin to work
@@ -24,10 +22,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
 
 
-=======
-    .run(function($ionicPlatform, Settings, Server, Sqlite, Geo, $rootScope) {
-        $ionicPlatform.ready(function() {
->>>>>>> parent of afcdd6d... settings + translation
             $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
                 console.log('$stateChangeStart to '+toState.to+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
             });
@@ -117,9 +111,11 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             document.addEventListener("volumedownbutton", volumedownCallback, false);
             document.addEventListener("volumeupbutton", volumeupCallback, false);
         });
+
+
     })
 
-    .config(function($stateProvider, $urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
@@ -220,4 +216,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/map');
 
+        // for security: http://angular-translate.github.io/docs/#/guide/19_security
+        $translateProvider.useSanitizeValueStrategy('sanitize');
+        $translateProvider.preferredLanguage('de');
+        $translateProvider.translations('de', {
+                map: "Karte",
+                server: "Server",
+                activateGps: "GPS aktivieren",
+                automaticZoom: 'Automatischer Zoom',
+                bearing: "Karte kippen",
+                followGps: "Position folgen",
+                navigationMode: "Animation Mode",
+                recordGps: "Position aufnehmen",
+                rotate: "Kartenrotation"
+        });
+
+        $translateProvider.translations('en', {
+            activateGps: "Activate GPS",
+        });
     });
