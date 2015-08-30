@@ -1,5 +1,3 @@
-<ion-view view-title="WIFI">
-  <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
         <img ng-src="">
@@ -14,5 +12,3 @@
         </ion-option-button>
       </ion-item>
     </ion-list>
-  </ion-content>
-</ion-view>
