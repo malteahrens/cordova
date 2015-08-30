@@ -16,7 +16,6 @@ angular.module('starter.controllers', [])
         }
 
         $scope.getGeoJson = function(timeStamp) {
-            console.log("timestamp: "+timeStamp);
             Sqlite.getGeoJson(timeStamp).then(function (res) {
                 $scope.geojsonRecords = res;
                 $scope.resultsCount = res.length;

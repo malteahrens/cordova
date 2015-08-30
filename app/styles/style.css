@@ -24,3 +24,7 @@
 .item.item-accordion.ng-hide-remove {
     display: block !important;
 }
+
+.pane {
+    background-color: white;
+}

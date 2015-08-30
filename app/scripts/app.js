@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 console.log("couldn't determine locale");
             }
 
-
+            /** DEBUG ROUTES
             $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
                 console.log('$stateChangeStart to '+toState.to+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
             });
@@ -44,6 +44,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 console.log('$stateNotFound '+unfoundState.to+'  - fired when a state cannot be found by its name.');
                 console.log(unfoundState, fromState, fromParams);
             });
+            **/
 
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -216,5 +217,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/map');
 
+        // for security: http://angular-translate.github.io/docs/#/guide/19_security
+        $translateProvider.useSanitizeValueStrategy('sanitize');
+        $translateProvider.preferredLanguage('de');
+        $translateProvider.translations('de', {
+                map: "Karte",
+                server: "Server",
+                activateGps: "GPS aktivieren",
+                automaticZoom: 'Automatischer Zoom',
+                bearing: "Karte kippen",
+                followGps: "Position folgen",
+                navigationMode: "Animation Mode",
+                recordGps: "Position aufnehmen",
+                rotate: "Kartenrotation"
+        });
 
+        $translateProvider.translations('en', {
+            activateGps: "Activate GPS",
+        });
     });

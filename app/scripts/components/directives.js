@@ -5,7 +5,7 @@ angular.module("starter")
         template: '<div ng-include="url"></div>',
         link: function(scope, element, attrs){
             console.log("load settings.html");
-            scope.url = "scripts/components/setting/setting.hmtl";
+            scope.url = "scripts/components/setting/setting.html";
         }
     }
 })
@@ -15,7 +15,7 @@ angular.module("starter")
         template: '<div ng-include="url"></div>',
         link: function(scope, element, attrs){
             console.log("load layers.html");
-            scope.url = "scripts/components/layer/layers.hmtl";
+            scope.url = "scripts/components/layer/layers.html";
         }
     }
 })
@@ -25,7 +25,7 @@ angular.module("starter")
         template: '<div ng-include="url"></div>',
         link: function(scope, element, attrs){
             console.log("load debug.html");
-            scope.url = "scripts/components/debug/debug.hmtl";
+            scope.url = "scripts/components/debug/debug.html";
         }
     }
 })
@@ -35,7 +35,7 @@ angular.module("starter")
         template: '<div ng-include="url"></div>',
         link: function(scope, element, attrs){
             console.log("load wlan.html");
-            scope.url = "scripts/components/wlan/wlan.hmtl";
+            scope.url = "scripts/components/wlan/wlan.html";
         }
     }
 })
@@ -45,7 +45,7 @@ angular.module("starter")
         template: '<div ng-include="url"></div>',
         link: function(scope, element, attrs){
             console.log("load experiment.html");
-            scope.url = "scripts/components/experiment/experiment.hmtl";
+            scope.url = "scripts/components/experiment/experiment.html";
         }
     }
 })
@@ -55,7 +55,7 @@ angular.module("starter")
         template: '<div ng-include="url"></div>',
         link: function(scope, element, attrs){
             console.log("load map.html");
-            scope.url = "scripts/components/map/map.hmtl";
+            scope.url = "scripts/components/map/map.html";
         }
     }
 })
