@@ -1,3 +1,4 @@
+angular.module("starter")
 .directive("includeSettings", function() {
     return {
         restrict: "E",
