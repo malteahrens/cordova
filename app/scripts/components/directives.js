@@ -39,3 +39,13 @@ angular.module("starter")
         }
     }
 })
+.directive("includeExperiments", function() {
+    return {
+        restrict: "E",
+        template: '<div ng-include="url"></div>',
+        link: function(scope, element, attrs){
+            console.log("load experiment.html");
+            scope.url = "scripts/components/experiment/experiment.hmtl";
+        }
+    }
+})
