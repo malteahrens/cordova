@@ -18,7 +18,7 @@ angular.module("starter")
                 template = 'toggle';
             }
 
-            scope.url = "/templates/widgets/"+ template + ".html";
+            scope.url = "scripts/components/setting/templates/"+ template + ".html";
         }
     }
 })

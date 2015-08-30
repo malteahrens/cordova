@@ -1,0 +1,17 @@
+<ion-list>
+  <div ng-repeat="(key, value) in settings">
+      <ion-item class="item-stable"
+                ng-click="toggleGroup(key)"
+                ng-class="{active: isGroupShown(key)}">
+          <i class="icon" ng-class="isGroupShown(key) ? 'ion-minus' : 'ion-plus'"></i>
+          &nbsp;
+          {{key | translate}}
+      </ion-item>
+
+      <ion-item class="item-accordion"
+                ng-repeat="(setting, state) in value"
+                ng-show="isGroupShown(key)">
+          <include-setting-component type="{{state}}"></include-setting-component>
+      </ion-item>
+  </div>
+</ion-list>
