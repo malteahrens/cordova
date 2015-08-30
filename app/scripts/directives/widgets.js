@@ -1,13 +1,24 @@
-angular.module("starter").directive("toggleInclude", function() {
+angular.module("starter")
+.directive("includeSettingComponent", function() {
     return {
         restrict: "E",
-        templateUrl: "/templates/widgets/toggle.html"
-    }
-})
+        template: '<div ng-include="url"></div>',
+        link: function(scope, element, attrs){
+            var typeOf = (typeof attrs.type)
+            console.log(attrs.type);
+            var integer = parseInt(attrs.type, 10);
+            var template = '';
 
-.directive("inputInclude", function() {
-    return {
-        restrict: "E",
-        templateUrl: "/templates/widgets/input.html"
+            console.log(integer);
+            if (!isNaN(integer)) {
+                typeOf = 'integer';
+                template = 'input';
+            } else {
+                typeOf = 'boolean';
+                template = 'toggle';
+            }
+
+            scope.url = "/templates/widgets/"+ template + ".html";
+        }
     }
 })

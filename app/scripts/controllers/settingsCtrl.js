@@ -92,22 +92,4 @@ angular.module('starter')
     $scope.isGroupShown = function(group) {
         return $scope.shownGroup === group;
     };
-    $scope.typeOf = function(value) {
-        var typeOf = typeof value
-        if(typeOf === 'boolean') {
-            console.log("value is a boolean");
-        }
-        if(typeOf === 'number') {
-            console.log("value is a boolean");
-        }
-        if (typeOf === 'number') {
-            if(value % 1 === 0) {
-                typeOf = 'integer';
-            } else {
-                typeOf = 'float';
-            }
-
-        }
-        return typeOf
-    }
 })

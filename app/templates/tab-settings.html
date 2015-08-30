@@ -13,8 +13,7 @@
               <ion-item class="item-accordion"
                         ng-repeat="(setting, state) in value"
                         ng-show="isGroupShown(key)">
-                  <toggle-include ng-if="typeOf(state)==='boolean'"></toggle-include>
-                  <input-include ng-if="typeOf(state)==='integer'"></input-include>
+                  <include-setting-component type="{{state}}"></include-setting-component>
               </ion-item>
           </div>
       </ion-list>
