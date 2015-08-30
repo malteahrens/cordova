@@ -1,0 +1,1 @@
+<div ng-repeat="entry in log">{{entry.time | date:'hh:mm:ss:sss'}} - {{entry.text}}</div>

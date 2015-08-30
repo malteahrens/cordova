@@ -9,3 +9,25 @@ angular.module("starter")
         }
     }
 })
+
+.directive("includeLayers", function() {
+    return {
+        restrict: "E",
+        template: '<div ng-include="url"></div>',
+        link: function(scope, element, attrs){
+            console.log("load layers.html");
+            scope.url = "scripts/components/layer/layers.hmtl";
+        }
+    }
+})
+
+    .directive("includeDebug", function() {
+        return {
+            restrict: "E",
+            template: '<div ng-include="url"></div>',
+            link: function(scope, element, attrs){
+                console.log("load debug.html");
+                scope.url = "scripts/components/debug/debug.hmtl";
+            }
+        }
+    })

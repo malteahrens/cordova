@@ -1,5 +1,7 @@
 <ion-view cache-view="false" view-title="Debug">
   <ion-content padding="true">
-    <div ng-repeat="entry in log">{{entry.time | date:'hh:mm:ss:sss'}} - {{entry.text}}</div>
+
+      <!-- this maps to the scripts/components/directives.js file -->
+      <include-debug></include-debug>
   </ion-content>
 </ion-view>

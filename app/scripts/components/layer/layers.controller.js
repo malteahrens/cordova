@@ -1,5 +1,5 @@
 angular.module('starter.controllers', [])
-.controller('LayersCtrl', function ($scope, Sqlite, Layers, GeoOperations, Debug, $stateParams, $state) {
+    .controller('LayersCtrl', function ($scope, Sqlite, Layers, GeoOperations, Debug, $stateParams, $state) {
         $scope.resultsCount = 0;
         $scope.geojsonRecords = [];
 
@@ -50,4 +50,4 @@ angular.module('starter.controllers', [])
         $scope.length = function(geojson) {
             return geojson.time;
         }
-})
+    })
