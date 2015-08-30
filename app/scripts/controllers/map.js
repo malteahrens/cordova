@@ -1,5 +1,5 @@
 angular.module('starter')
-    .controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, GeoOperations, Sqlite, Layers, $ionicScrollDelegate) {
+    .controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, GeoOperations, Sqlite, Layers) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -27,7 +27,6 @@ angular.module('starter')
             notify: function(layerId, data) {
                 $scope.setLineData(layerId, data);
                 var bbox = GeoOperations.getBounds(data);
-                console.log(bbox);
                 map.fitBounds(bbox);
             },
             watch: "gpsStorage"
@@ -284,7 +283,6 @@ angular.module('starter')
             } else if (elem.webkitRequestFullscreen) {
                 elem.webkitRequestFullscreen();
             }
-            $ionicScrollDelegate.resize();
         }
 
         $scope.$on('$ionicView.enter', function () {
