@@ -1,17 +1,7 @@
 angular.module('starter')
-    .controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, GeoOperations, Sqlite, Layers, $ionicScrollDelegate) {
-        mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            zoom: 12,
-            center: [48.14882451158226, 11.451873779296875],
-            style: 'https://www.mapbox.com/mapbox-gl-styles/styles/bright-v7.json',
-            minZoom: 9,
-            maxZoom: 20,
-            interactive: true
-        });
-        map.addControl(new mapboxgl.Navigation());
-        map.setPitch(Settings.map.bearing);
+    .controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, GeoOperations, Sqlite, LayerFact, $ionicScrollDelegate, MapServ) {
+        MapServ.initMap()
+
         $scope.statusLed = "yellow";
 
         $scope.statusToggle = function() {
@@ -32,18 +22,9 @@ angular.module('starter')
             },
             watch: "gpsStorage"
         }
-        Layers.observer(layerDataChange);
+        LayerFact.observer(layerDataChange);
 
-        map.on('load', function(e) {
-            Debug.trace("Map loaded");
-            //var mapCanvasContainer = map.getCanvasContainer();
-            //console.log(mapCanvasContainer);
-            $scope.addGeojsonLayer({'name':'locationAccuracy'});
-            $scope.addGeojsonLayer({'name':'locationHeading'});
-            $scope.addGeojsonLayer({'name':'location'});
-            $scope.addGeojsonLayer({'name':'gpsTrace'});
-            $scope.addGeojsonLayer({'name':'gpsStorage'});
-        });
+
 
         // access the device compass sensor
         if (window.DeviceOrientationEvent) {
@@ -57,7 +38,7 @@ angular.module('starter')
                     blocked = true;
                     // only update if the change is greater than 5 degrees
                     if(Math.abs(event.alpha-oldValue) > 10) {
-                        map.rotateTo(event.alpha*(-1), rotateOptions);
+                        MapServ.rotate(event.alpha*(-1), rotateOptions);
                         oldValue = event.alpha
                     }
                     // after 2000ns allow to rotate the map again
@@ -68,95 +49,8 @@ angular.module('starter')
             alert("no device orientation supported...");
         }
 
-        $scope.addGeojsonLayer = function(layer, visibility) {
-            if(visibility === undefined){
-                visibility = true;
-            }
-            var symbolTemplate = {}
-            var lineTemplate = {
-                "type": 'line',
-                "layout": {
-                    "visibility": visibility
-                },
-                "paint": {
-                    "line-color": "#ff0000",
-                    "line-width": 2
-                }
-            }
-            var fillTemplate = {}
-
-            var style = {
-                "location": {
-                    "type": 'symbol',
-                    "layout": {
-                        "icon-image": "circle-12"
-                    },
-                    "paint": {
-                        "icon-size": 1,
-                        "icon-color": "#669966"
-                    }
-                },
-                "locationAccuracy": {
-                    "type": 'fill',
-                    "layout": {
-                        "visibility": visibility
-                    },
-                    "paint": {
-                        "fill-outline-color": "#ff0000",
-                        "fill-color": "#ff0000",
-                        "fill-opacity": 0.2
-                    }
-                },
-                "locationHeading": {
-                    "type": 'line',
-                    "layout": {
-                        "visibility": visibility
-                    },
-                    "paint": {
-                        "line-color": "#ff0000",
-                        "line-width": 2
-                    }
-                },
-                "gpsTrace": {
-                    "type": 'line',
-                    "layout": {
-                        "visibility": visibility
-                    },
-                    "paint": {
-                        "line-color": "#ff0000",
-                        "line-width": 2
-                    }
-                },
-                "gpsStorage": {
-                    "type": 'line',
-                    "layout": {
-                        "visibility": visibility
-                    },
-                    "paint": {
-                        "line-color": "#ffff00",
-                        "line-width": 2
-                    }
-                }
-            }
-            data = turf.linestring([0, 0]);
-            map.addSource(layer.name, {
-                "type": "geojson",
-                "data": data
-            });
-            map.addLayer({
-                "id": layer.name,
-                "type": style[layer.name].type,
-                "source": layer.name,
-                "interactive": true,
-                "layout": style[layer.name].layout,
-                "paint": style[layer.name].paint
-            });
-            Debug.trace("layer added: "+layer.name);
-            $scope.$apply();
-        }
-
         $scope.setLineData = function(layerId, data) {
-            //Debug.trace("Updated data: "+layerId);
+            Debug.trace("Updated data: "+layerId);
             var layer = map.getSource(layerId);
             if(data !== undefined && layer !== undefined) {
                 layer.setData(data);
@@ -238,8 +132,8 @@ angular.module('starter')
             }
 
             $scope.statusToggle();
-            Layers.pushData([position.coords.longitude, position.coords.latitude]);
-            $scope.setLineData('gpsTrace', Layers.getData());
+            LayerFact.pushData([position.coords.longitude, position.coords.latitude]);
+            $scope.setLineData('gpsTrace', LayerFact.getData());
         };
 
         function onError(error) {
@@ -288,13 +182,7 @@ angular.module('starter')
         }
 
         $scope.$on('$ionicView.enter', function () {
-            if (!Settings.map.rotate) {
-                map.rotateTo(0);
-            }
-            if (Settings.map.bearing) {
-                map.setPitch(Settings.map.bearing);
-                map.resize();
-
-            }
+            MapServ.rotate(0);
+            MapServ.setPitch();
         });
     })

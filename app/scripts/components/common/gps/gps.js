@@ -76,8 +76,6 @@ angular.module('starter')
         this.options = options;
     }
 
-
-
     return {
         startBackgroundGeoloc: startBackgroundGeoloc,
         stopBackgroundGeoloc: stopBackgroundGeoloc,

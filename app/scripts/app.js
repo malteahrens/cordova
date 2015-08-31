@@ -1,4 +1,3 @@
-// angular.module is a global place for creating, registering and retrieving Angular modules
 // bootstrap angular manually instead of ng-init in body tag
 angular.element(document).ready(function() {
     angular.bootstrap(document, ['starter']);
@@ -6,7 +5,7 @@ angular.element(document).ready(function() {
 
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'pascalprecht.translate'])
 
-    .run(function($ionicPlatform, Settings, Server, Sqlite, Geo, $rootScope, $translate) {
+    .run(function($ionicPlatform, Settings, Server, Sqlite, Geo, $rootScope, $translate, $injector) {
         $ionicPlatform.ready(function() {
             // get locale - this needs the cordova globilization plugin to work
             if(typeof navigator.globalization !== "undefined") {

@@ -1,5 +1,5 @@
 angular.module('starter.controllers', [])
-    .controller('LayersCtrl', function ($scope, Sqlite, Layers, GeoOperations, Debug, $stateParams, $state) {
+    .controller('LayersCtrl', function ($scope, Sqlite, LayerFact, GeoOperations, Debug, $stateParams, $state) {
         $scope.resultsCount = 0;
         $scope.geojsonRecords = [];
 
@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
         }
 
         $scope.saveGeoJson = function() {
-            var geojson = Layers.getData();
+            var geojson = LayersFact.getData();
             Sqlite.saveGeoJson(geojson);
             var lineLength = GeoOperations.lineLength(geojson);
             $scope.getGeoJson();
@@ -37,7 +37,7 @@ angular.module('starter.controllers', [])
         $scope.showGeojson = function(json) {
             var jsonString = unescape(json);
             var geojson = JSON.parse(jsonString);
-            Layers.setLayerData('gpsStorage', geojson);
+            LayerFact.setLayerData('gpsStorage', geojson);
         }
 
         $scope.showOnMap = function(json) {
