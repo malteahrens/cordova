@@ -1,3 +1,4 @@
+// transclusion
 angular.module("starter")
 .directive("includeSettings", function() {
     return {
@@ -49,7 +50,7 @@ angular.module("starter")
         }
     }
 })
-.directive("includeMap", function() {
+.directive("includeMapMenu", function() {
     return {
         restrict: "E",
         template: '<div ng-include="url"></div>',

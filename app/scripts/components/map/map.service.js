@@ -6,7 +6,7 @@ angular.module('starter')
             container: 'map',
             zoom: 12,
             center: [11.451873779296875, 48.14882451158226],
-            style: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/satellite-v8.json',
+            style: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/dark-v8.json',
             minZoom: 9,
             maxZoom: 20,
             interactive: true
@@ -32,6 +32,14 @@ angular.module('starter')
         map.resize();
     }
 
+    this.render = function() {
+        map.render();
+    }
+
+    this.getCanvas = function() {
+        return map.getCanvas();
+    }
+
     this.setPitch = function() {
         if (Settings.map.bearing) {
             map.setPitch(Settings.map.bearing);
@@ -49,7 +57,32 @@ angular.module('starter')
         map.addSource(layerName, layerConfig);
     }
 
-    this.addLayer = function(layer) {
-        map.addLayer(layer);
+    this.addLayer = function(layerName) {
+        map.addLayer(layerName);
+    }
+
+    this.getSource = function(layerName) {
+        return map.getSource(layerName);
+    }
+
+    this.easeTo = function(options) {
+        map.easeTo(options);
+    }
+
+    this.zoomTo = function(zoomLevel) {
+        map.zoomTo(zoomLevel);
+    }
+
+    this.addLayerDataObserver = function() {
+        var layerDataChange = {
+            notify: function (layerId, data) {
+                $scope.setLineData(layerId, data);
+                var bbox = GeoOperations.getBounds(data);
+                console.log(bbox);
+                map.fitBounds(bbox);
+            },
+            watch: "gpsStorage"
+        }
+        LayerFact.observer(layerDataChange);
     }
 });

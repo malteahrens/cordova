@@ -1,5 +1,5 @@
 angular.module('starter')
-    .controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, GeoOperations, Sqlite, LayerFact, $ionicScrollDelegate, MapServ) {
+    .controller('MapCtrl', function ($rootScope, $scope, $window, $timeout, Settings, Debug, Geo, GeoOperations, Sqlite, LayerFact, $ionicScrollDelegate, MapServ, IonicServ) {
         MapServ.initMap()
 
         $scope.statusLed = "yellow";
@@ -13,18 +13,8 @@ angular.module('starter')
             $scope.$apply();
         }
 
-        var layerDataChange = {
-            notify: function(layerId, data) {
-                $scope.setLineData(layerId, data);
-                var bbox = GeoOperations.getBounds(data);
-                console.log(bbox);
-                map.fitBounds(bbox);
-            },
-            watch: "gpsStorage"
-        }
-        LayerFact.observer(layerDataChange);
-
-
+        // react on data changes...
+        MapServ.addLayerDataObserver();
 
         // access the device compass sensor
         if (window.DeviceOrientationEvent) {
@@ -51,7 +41,7 @@ angular.module('starter')
 
         $scope.setLineData = function(layerId, data) {
             Debug.trace("Updated data: "+layerId);
-            var layer = map.getSource(layerId);
+            var layer = MapServ.getSource(layerId);
             if(data !== undefined && layer !== undefined) {
                 layer.setData(data);
             } else {
@@ -61,7 +51,7 @@ angular.module('starter')
 
         $scope.setBufferData = function(layerId, data, radius) {
             try {
-                var layer = map.getSource(layerId);
+                var layer = MapServ.getSource(layerId);
                 if (layer !== undefined) {
                     var point = {
                         "type": "Feature",
@@ -107,7 +97,7 @@ angular.module('starter')
 
             var zoomLevel = GeoOperations.speedToZoom(position.coords.speed);
             if(Settings.map.navigationMode) {
-                map.easeTo({
+                MapServ.easeTo({
                     center: location1,
                     zoom: zoomLevel,
                     duration: 0,
@@ -116,12 +106,12 @@ angular.module('starter')
             }
             else {
                 if(Settings.map.followGps) {
-                    map.easeTo({ center: location1, duration: 0 });
+                    MapServ.easeTo({ center: location1, duration: 0 });
                 }
 
                 if(Settings.map.automaticZoom) {
                     console.log("speed: "+position.coords.speed+", zoomLevel: "+zoomLevel);
-                    map.zoomTo(zoomLevel);
+                    MapServ.zoomTo(zoomLevel);
                 }
             }
 
@@ -157,9 +147,9 @@ angular.module('starter')
         var fullscreenCb = function() {
             console.log("got fullscreen ready event");
             $timeout(function() {
-                map.resize();
-                map.render();
-                var elem = map.getCanvas();
+                MapServ.resize();
+                MapServ.render();
+                var elem = MapServ.getCanvas();
                 console.log(elem);
                 console.log("resize called");
             }, 3000);
@@ -168,7 +158,7 @@ angular.module('starter')
         document.addEventListener('webkitfullscreenchange',fullscreenCb);
         $scope.fullscreen = function() {
             // full-screen available?
-            var elem = map.getCanvas();
+            var elem = MapServ.getCanvas();
             if (elem.requestFullscreen) {
                 elem.requestFullscreen();
             } else if (elem.msRequestFullscreen) {
@@ -179,6 +169,13 @@ angular.module('starter')
                 elem.webkitRequestFullscreen();
             }
             $ionicScrollDelegate.resize();
+        }
+
+
+        $scope.toggleWidget = function(widgetName) {
+            if(widgetName === 'fullscreen') {
+                //IonicServ.fullscreen();
+            }
         }
 
         $scope.$on('$ionicView.enter', function () {

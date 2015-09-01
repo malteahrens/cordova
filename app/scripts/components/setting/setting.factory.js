@@ -9,7 +9,8 @@ angular.module('starter')
             bearing: 90,
             server: false,
             automaticZoom: false,
-            navigationMode: false
+            navigationMode: false,
+            mapStlye: ''
         };
 
         var observerCallbacks = [];

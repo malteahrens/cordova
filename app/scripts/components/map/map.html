@@ -1,1 +1,16 @@
-<div>test</div>
+<nav class='menu-ui'>
+    <a ng-click="toggleWidget('fullscreen')" class='active'>Fullscreen</a>
+    <a ng-click="toggleWidget('fullscreen')" class='active'>
+        <div id='overlay'>
+            <svg height="25" width="30">
+                <circle cx="15" cy="15" r="10" fill="{{statusLed}}" />
+            </svg>
+            <svg height="25" width="30">
+                    <circle cx="15" cy="15" r="10" fill="blue" />
+            </svg>
+            <svg height="25" width="30">
+                <circle cx="15" cy="15" r="10" fill="green" ng-click="fullscreen()"/>
+            </svg>
+        </div>
+    </a>
+</nav>
