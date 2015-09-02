@@ -1,5 +1,5 @@
 angular.module('starter')
-.service('MapServ', function(Settings, Debug, LayerFact) {
+.service('MapServ', function(Settings, Debug, LayerFact, GpsFactory) {
     this.initMap = function() {
         mapboxgl.accessToken = 'pk.eyJ1IjoiLS1tYWx0ZWFocmVucyIsImEiOiJGU21QX2VVIn0.GVZ36UsnwYc_JfiQ61lz7Q';
         map = new mapboxgl.Map({
@@ -18,11 +18,11 @@ angular.module('starter')
             Debug.trace("Map loaded");
             //var mapCanvasContainer = map.getCanvasContainer();
             //console.log(mapCanvasContainer);
-            //LayerFact.addGeojsonLayer({'name':'locationAccuracy'});
-            //LayerFact.addGeojsonLayer({'name':'locationHeading'});
-            //LayerFact.addGeojsonLayer({'name':'location'});
-            //LayerFact.addGeojsonLayer({'name':'gpsTrace'});
-            //LayerFact.addGeojsonLayer({'name':'gpsStorage'});
+            addGeojsonLayer({'name':'locationAccuracy'});
+            addGeojsonLayer({'name':'locationHeading'});
+            addGeojsonLayer({'name':'location'});
+            addGeojsonLayer({'name':'gpsTrace'});
+            addGeojsonLayer({'name':'gpsStorage'});
         });
 
         return "init map in #map div successful";
@@ -53,13 +53,15 @@ angular.module('starter')
         }
     }
 
-    this.addSource = function(layerName, layerConfig) {
+    var addSource = function(layerName, layerConfig) {
         map.addSource(layerName, layerConfig);
     }
+    this.addSource = addSource;
 
-    this.addLayer = function(layerName) {
+    var addLayer = function(layerName) {
         map.addLayer(layerName);
     }
+    this.addLayer = addLayer;
 
     this.getSource = function(layerName) {
         return map.getSource(layerName);
@@ -85,4 +87,130 @@ angular.module('starter')
         }
         LayerFact.observer(layerDataChange);
     }
-});
+
+    this.setLineData = function(layerId, data) {
+        //Debug.trace("Updated data: "+layerId);
+        var layer = this.getSource(layerId);
+        if(data !== undefined && layer !== undefined) {
+            layer.setData(data);
+        } else {
+            console.log("couldn't draw gpsTrace, data is empty");
+        }
+    }
+
+    this.setBufferData = function(layerId, data, radius) {
+        try {
+            var layer = this.getSource(layerId);
+            if (layer !== undefined) {
+                var point = {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": data
+                    }
+                }
+
+                var buffered = turf.buffer(point, radius, 'kilometers')
+
+                // proj4js only supports simple point coordinates
+                //var reprojected = proj4('EPSG:4326','EPSG:3857',buffered);
+
+                layer.setData(buffered);
+            } else {
+                console.log("Couldn't update data: layer not found");
+            }
+        } catch(err) {
+            Debug.trace("Could not find layer")
+        }
+    };
+
+    var addGeojsonLayer = function(layer, visibility) {
+            if(visibility === undefined){
+                visibility = true;
+            }
+            var symbolTemplate = {}
+            var lineTemplate = {
+                "type": 'line',
+                "layout": {
+                    "visibility": visibility
+                },
+                "paint": {
+                    "line-color": "#ff0000",
+                    "line-width": 2
+                }
+            }
+            var fillTemplate = {}
+
+            var style = {
+                "location": {
+                    "type": 'symbol',
+                    "layout": {
+                        "icon-image": "circle-12"
+                    },
+                    "paint": {
+                        "icon-size": 1,
+                        "icon-color": "#669966"
+                    }
+                },
+                "locationAccuracy": {
+                    "type": 'fill',
+                    "layout": {
+                        "visibility": visibility
+                    },
+                    "paint": {
+                        "fill-outline-color": "#ff0000",
+                        "fill-color": "#ff0000",
+                        "fill-opacity": 0.2
+                    }
+                },
+                "locationHeading": {
+                    "type": 'line',
+                    "layout": {
+                        "visibility": visibility
+                    },
+                    "paint": {
+                        "line-color": "#ff0000",
+                        "line-width": 2
+                    }
+                },
+                "gpsTrace": {
+                    "type": 'line',
+                    "layout": {
+                        "visibility": visibility
+                    },
+                    "paint": {
+                        "line-color": "#ff0000",
+                        "line-width": 2
+                    }
+                },
+                "gpsStorage": {
+                    "type": 'line',
+                    "layout": {
+                        "visibility": visibility
+                    },
+                    "paint": {
+                        "line-color": "#ffff00",
+                        "line-width": 2
+                    }
+                }
+            }
+            data = turf.linestring([0, 0]);
+            addSource(layer.name, {
+                "type": "geojson",
+                "data": data
+            });
+
+            addLayer({
+                "id": layer.name,
+                "type": style[layer.name].type,
+                "source": layer.name,
+                "interactive": true,
+                "layout": style[layer.name].layout,
+                "paint": style[layer.name].paint
+            });
+
+            Debug.trace("layer added: "+layer.name);
+            //$scope.$apply();
+        }
+
+    });

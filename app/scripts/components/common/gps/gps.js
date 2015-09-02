@@ -1,5 +1,5 @@
 angular.module('starter')
-.factory('Geo', ['$q', 'Settings', 'Debug', '$cordovaBackgroundGeolocation', function($q, Settings, Debug, $cordovaBackgroundGeolocation){
+.factory('GpsFactory', ['$q', 'Settings', 'Debug', '$cordovaBackgroundGeolocation', function($q, Settings, Debug, $cordovaBackgroundGeolocation){
     this_ = this
     this_.watchId = 333;
     var startWatch = function(onSuccess, onError, options){

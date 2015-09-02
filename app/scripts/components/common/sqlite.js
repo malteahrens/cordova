@@ -1,5 +1,5 @@
 angular.module('starter')
-    .factory('Sqlite', function($cordovaSQLite, $window, $q, Debug, $cordovaSQLite, LayerFact, GeoOperations) {
+    .factory('Sqlite', function($cordovaSQLite, $window, $q, Debug, $cordovaSQLite, GeoOperations) {
 
         var databases = {
             db1: null,

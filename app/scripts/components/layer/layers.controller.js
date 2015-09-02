@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
         }
 
         $scope.saveGeoJson = function() {
-            var geojson = LayersFact.getData();
+            var geojson = LayerFact.getData();
             Sqlite.saveGeoJson(geojson);
             var lineLength = GeoOperations.lineLength(geojson);
             $scope.getGeoJson();

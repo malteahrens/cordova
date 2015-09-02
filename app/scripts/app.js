@@ -5,7 +5,7 @@ angular.element(document).ready(function() {
 
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'pascalprecht.translate'])
 
-    .run(function($ionicPlatform, Settings, Server, Sqlite, Geo, $rootScope, $translate, $injector) {
+    .run(function($ionicPlatform, Settings, Server, Sqlite, GpsFactory, $rootScope, $translate, $injector, LayerFact, MapServ, GeoOperations) {
         $ionicPlatform.ready(function() {
             // get locale - this needs the cordova globilization plugin to work
             if(typeof navigator.globalization !== "undefined") {
@@ -76,15 +76,84 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
             }
             Settings.observer(restartServer);
 
+
+            var options = {maximumAge: 0, timeout: 100000, enableHighAccuracy: true}
+            function onSuccess(position) {
+                var location1 = [position.coords.latitude, position.coords.longitude];
+                var location2 = [position.coords.longitude, position.coords.latitude];
+
+                var point = {
+                    "type": "Feature",
+                    "properties": {
+                        "marker-color": "#0f0"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": location2
+                    }
+                };
+
+                var radius = position.coords.accuracy * 0.001
+                MapServ.setBufferData("locationAccuracy", location2, radius);
+
+                var zoomLevel = GeoOperations.speedToZoom(position.coords.speed);
+                if(Settings.map.navigationMode) {
+                    MapServ.easeTo({
+                        center: location2,
+                        zoom: zoomLevel,
+                        duration: 0,
+                        pitch: Settings.map.bearing
+                    });
+                }
+                else {
+                    if(Settings.map.followGps) {
+                        MapServ.easeTo({ center: location2, duration: 0 });
+                    }
+
+                    if(Settings.map.automaticZoom) {
+                        console.log("speed: "+position.coords.speed+", zoomLevel: "+zoomLevel);
+                        MapServ.zoomTo(zoomLevel);
+                    }
+                }
+
+
+                if(Settings.map.recordGps) {
+                    var data = [position.coords.latitude, position.coords.longitude]
+                    Sqlite.writeLocation(data);
+                }
+
+                //$scope.statusToggle();
+                LayerFact.pushData([position.coords.longitude, position.coords.latitude]);
+                MapServ.setLineData('gpsTrace', LayerFact.getData());
+            };
+
+            function onError(error) {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        console.log("User denied the request for Geolocation.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        console.log("Location information is unavailable.");
+                        break;
+                    case error.TIMEOUT:
+                        console.log("The request to get user location timed out.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        console.log("An unknown error occurred.");
+                        break;
+                }
+            };
+            GpsFactory.configure(onSuccess, onError, options);
+
             // GPS
             var settingsChange = {
                 notify: function(setting) {
                     if (setting) {
-                        Geo.startBackgroundGeoloc();
-                        Geo.startGps();
+                        GpsFactory.startBackgroundGeoloc();
+                        GpsFactory.startGps();
                     } else {
-                        Geo.stopBackgroundGeoloc();
-                        Geo.stopGps();
+                        GpsFactory.stopBackgroundGeoloc();
+                        GpsFactory.stopGps();
                         console.log("got notification to stop gps background");
                     }
                 },

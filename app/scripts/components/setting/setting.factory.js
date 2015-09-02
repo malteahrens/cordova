@@ -23,7 +23,7 @@ angular.module('starter')
         var observerCallbacks = [];
         //register an observer
         var registerObserverCallback = function(callback) {
-            console.log("added observer")
+            console.log("added observer: "+callback.watchSetting)
             observerCallbacks.push(callback);
         };
 
