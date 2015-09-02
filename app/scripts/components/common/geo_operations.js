@@ -26,7 +26,7 @@ angular.module('starter')
     var speedToZoom = function getZoomLevel(speed) {
         var zoomLevel = 17 - speed;
         if(speed > 12) {
-            zoomLevel = 6;
+            zoomLevel = 12;
         }
         return zoomLevel;
     }
