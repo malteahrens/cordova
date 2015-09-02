@@ -16,14 +16,7 @@ angular.module('starter')
                 server: Settings.map.server,
                 automaticZoom: Settings.map.automaticZoom,
                 navigationMode: Settings.map.navigationMode,
-                styles: {
-                    satellite: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles//satellite-v8.json',
-                    hybrid: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/satellite-hybrid-v8.json',
-                    bright: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles//bright-v8.json',
-                    streets: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles//streets-v8.json',
-                    dark: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/dark-v8.json',
-                    emerald: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/emerald-v8.json'
-                },
+                styles: '',
                 test: [
                     'mapbox.dark-v7',
                     'mapbox.light-v7',

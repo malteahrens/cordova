@@ -6,7 +6,7 @@ angular.module('starter')
             container: 'map',
             zoom: 12,
             center: [11.451873779296875, 48.14882451158226],
-            style: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/dark-v8.json',
+            style: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/emerald-v8.json',
             minZoom: 9,
             maxZoom: 20,
             interactive: true

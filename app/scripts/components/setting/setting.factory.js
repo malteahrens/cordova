@@ -6,11 +6,18 @@ angular.module('starter')
             recordGps: true,
             followGps: true,
             rotate: false,
-            bearing: 90,
+            bearing: 0,
             server: false,
             automaticZoom: false,
             navigationMode: false,
-            mapStlye: ''
+            mapStyles: {
+                satellite: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles//satellite-v8.json',
+                hybrid: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/satellite-hybrid-v8.json',
+                bright: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles//bright-v8.json',
+                streets: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles//streets-v8.json',
+                dark: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/dark-v8.json',
+                emerald: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-styles/master/styles/emerald-v8.json'
+            }
         };
 
         var observerCallbacks = [];
